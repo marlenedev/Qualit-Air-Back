@@ -7,9 +7,9 @@
 | S003 | GET /posts|  | => détail discussion
 | S004 | POST /utilisateurs | | => inscription
 | S005 | GET /utilisateurs/{id}|  | => authentification
-| S006 | GET / utilisateur/{id}/historique?indicateurs={indicateurs}&commune={commune}&dates={dates}  |    |
-| S007 | POST / utilisateur/{id}/historique?indicateurs={indicateurs}&commune={commune}&dates={dates} | |
-| S008 | GET / utilisateur/{id}/indicateurs?commune={commune}|  |
+| S006 | GET / utilisateurs/{id}/historique?indicateurs={indicateurs}&commune={commune}&dates={dates}  |    |
+| S007 | POST / utilisateurs/{id}/historique?indicateurs={indicateurs}&commune={commune}&dates={dates} | |
+| S008 | GET / utilisateurs/{id}/indicateurs?commune={commune}|  |
 | S009 | GET /utilisateurs/{id}/favoris  |    |
 | S010 | POST /utilisateurs/{id}/favoris | |
 | S011 | DELETE /utilisateurs/{id}/favoris/{id}| |
