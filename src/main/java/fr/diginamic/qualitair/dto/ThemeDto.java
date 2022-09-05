@@ -5,6 +5,10 @@ import java.util.List;
 import fr.diginamic.qualitair.entites.FilDiscussion;
 import fr.diginamic.qualitair.entites.Theme;
 
+/**
+ * Classe DTO pour l'entité {@link Theme}
+ *
+ */
 public class ThemeDto {
 
 	private String libelle;
