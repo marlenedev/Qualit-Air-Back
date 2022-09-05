@@ -1,5 +1,6 @@
 package fr.diginamic.qualitair.entites;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 
 import javax.persistence.*;
@@ -27,6 +28,7 @@ public class Utilisateur {
     @OneToMany(mappedBy = "utilisateur")
     private Set<Favoris> favoris;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_commune")
     private Commune commune;
@@ -46,7 +48,7 @@ public class Utilisateur {
     public Utilisateur() {
     }
 
-    public Utilisateur(Integer id, String nom, String prenom, String codePostal, String dept, String region, String email, String mdpHashe, String pseudo, boolean alertes, String role, String status) {
+    public Utilisateur(Integer id, String nom, String prenom, String codePostal, String dept, String region, String email, String mdpHashe, String pseudo, boolean alertes, String role, String status, Commune commune) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -59,6 +61,18 @@ public class Utilisateur {
         this.alertes = alertes;
         this.role = role;
         this.status = status;
+        this.commune = commune;
+    }
+
+    public Utilisateur(String nom, String prenom, String email, String pseudo, String region, Commune commune, String codePostal, String mdpHashe){
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.pseudo = pseudo;
+        this.region = region;
+        this.commune = commune;
+        this.codePostal = codePostal;
+        this.mdpHashe = mdpHashe;
     }
 
     public String getNom() {
@@ -83,6 +97,14 @@ public class Utilisateur {
 
     public void setCodePostal(String codePostal) {
         this.codePostal = codePostal;
+    }
+
+    public Commune getCommune() {
+        return commune;
+    }
+
+    public void setCommune(Commune commune) {
+        this.commune = commune;
     }
 
     public String getDept() {
