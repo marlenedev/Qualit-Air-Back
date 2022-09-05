@@ -1,6 +1,9 @@
 package fr.diginamic.qualitair.entites;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -14,10 +17,12 @@ public class FilDiscussion {
 
     private LocalDateTime dateCreation;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_utilisateur")
     private Utilisateur utilisateur;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_theme")
     private Theme theme;

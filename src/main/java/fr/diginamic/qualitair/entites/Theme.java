@@ -1,7 +1,8 @@
 package fr.diginamic.qualitair.entites;
 
 import javax.persistence.*;
-import java.util.Set;
+
+import java.util.List;;
 
 @Entity
 @Table(name = "themes")
@@ -14,7 +15,7 @@ public class Theme {
     private String libelle;
 
     @OneToMany(mappedBy = "theme")
-    private Set<FilDiscussion> filDiscussion;
+    private List<FilDiscussion> filDiscussion;
 
     public Theme() {
     }
@@ -39,4 +40,12 @@ public class Theme {
     public void setLibelle(String libelle) {
         this.libelle = libelle;
     }
+
+	public List<FilDiscussion> getFilDiscussion() {
+		return filDiscussion;
+	}
+
+	public void setFilDiscussion(List<FilDiscussion> filDiscussion) {
+		this.filDiscussion = filDiscussion;
+	}
 }
