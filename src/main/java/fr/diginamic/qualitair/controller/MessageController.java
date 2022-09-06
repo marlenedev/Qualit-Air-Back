@@ -19,7 +19,7 @@ public class MessageController {
 	}
 	
 	/**
-	  * Récupère les messages avec date/titre fil discussion /nb de vue/ pseudo
+	  * Récupère les messages avec date/titre fil discussion /nb de like/ pseudo
 	  * */
 	@GetMapping("messages")
 	public List<MessageDto> listAll(){
