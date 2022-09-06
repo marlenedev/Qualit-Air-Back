@@ -1,6 +1,8 @@
 package fr.diginamic.qualitair.services;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import fr.diginamic.qualitair.entites.Theme;
@@ -21,11 +23,28 @@ public class ThemeService {
 	}
 	
 	/**
-	 * Récupère tous les thèmes de la table 'themes'
-	 * @return List<Theme> une liste de tous les thèmes
+	 * Récupère tous les thèmes
+	 * @return une liste de tous les instances de {@link Theme}
 	 */
 	public List<Theme> findAll() {
 		return this.themeRepository.findAll();
+	}
+	
+	/**
+	 * Récupère un thème par son id
+	 * @param id Integer id du {@link Theme}
+	 * @return un thème encapsulé dans un {@link Optional}
+	 */
+	public Optional<Theme> findById(Integer id) {
+		return themeRepository.findById(id);
+	}
+	
+	/**
+	 * Supprimer un thème
+	 * @param theme
+	 */
+	public void delete(Theme theme) {
+		this.themeRepository.delete(theme);
 	}
 
 }
