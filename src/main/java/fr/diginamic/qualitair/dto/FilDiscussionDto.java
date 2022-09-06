@@ -7,18 +7,18 @@ import java.time.LocalDateTime;
 import fr.diginamic.qualitair.entites.FilDiscussion;
 
 /**
- * Dto Fil de discussion (date création, titre, nom de l'utilisateur, nb de message)
+ * Dto Fil de discussion (date création, titre, pseudo de l'utilisateur, nb de message)
  * */
 public class FilDiscussionDto {
 
 	 private LocalDateTime dateCreation;
 	 private String titre;
-	 private String utilisateurNom;
+	 private String pseudo;
 	 private Integer nbMessages;
 
 	 
 	 public static FilDiscussionDto from (FilDiscussion filDiscussion) {
-		 return new FilDiscussionDto(filDiscussion.getDateCreation(),filDiscussion.getTitre(),filDiscussion.getUtilisateur().getNom(),filDiscussion.getMessages().size());
+		 return new FilDiscussionDto(filDiscussion.getDateCreation(),filDiscussion.getTitre(),filDiscussion.getUtilisateur().getPseudo(),filDiscussion.getMessages().size());
 	 }
 	 
 	 
@@ -28,11 +28,14 @@ public class FilDiscussionDto {
 	}
 
 
-	public FilDiscussionDto(LocalDateTime dateCreation, String titre, String utilisateurNom, Integer nbMessages) {
+
+
+
+	public FilDiscussionDto(LocalDateTime dateCreation, String titre, String pseudo, Integer nbMessages) {
 		super();
 		this.dateCreation = dateCreation;
 		this.titre = titre;
-		this.utilisateurNom = utilisateurNom;
+		this.pseudo = pseudo;
 		this.nbMessages = nbMessages;
 	}
 
@@ -57,13 +60,14 @@ public class FilDiscussionDto {
 	}
 
 
-	public String getUtilisateurNom() {
-		return utilisateurNom;
+
+	public String getPseudo() {
+		return pseudo;
 	}
 
 
-	public void setUtilisateurNom(String utilisateurNom) {
-		this.utilisateurNom = utilisateurNom;
+	public void setPseudo(String pseudo) {
+		this.pseudo = pseudo;
 	}
 
 

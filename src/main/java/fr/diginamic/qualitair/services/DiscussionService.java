@@ -19,7 +19,7 @@ public class DiscussionService {
 	
 	
 	/**
-	 * Récupère tout les fils de discussion 
+	 * Récupère tous les fils de discussion 
 	 * */
 	public List<FilDiscussion> findAll(){
 		return this.discussionRepository.findAll();
