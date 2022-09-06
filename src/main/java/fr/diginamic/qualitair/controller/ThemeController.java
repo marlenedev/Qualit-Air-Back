@@ -7,10 +7,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.diginamic.qualitair.dto.ThemeDto;
 import fr.diginamic.qualitair.entites.Theme;
+import fr.diginamic.qualitair.exception.CreerThemeException;
 import fr.diginamic.qualitair.services.ThemeService;
 
 @RestController
@@ -31,6 +34,22 @@ public class ThemeController {
 	@GetMapping("themes")
 	public List<ThemeDto> listAll() {
 		return this.themeService.findAll().stream().map(ThemeDto::from).toList();
+	}
+	
+	/**
+	 * S018 POST/themes
+	 * Ajouter un thème avec un libellé
+	 * @param themeDto
+	 * @return si réussi : nouveau instance de {@link ThemeDto} / sinon erreur 400
+	 */
+	@PostMapping("themes")
+	public ResponseEntity<?> creerTheme(@RequestBody ThemeDto themeDto) {
+		try {
+		Theme nouveauTheme = themeService.creerTheme(themeDto);
+		return ResponseEntity.status(200).body(nouveauTheme);
+		} catch(CreerThemeException e) {
+			return ResponseEntity.status(400).body("Le thème n'a pas pu être créé");
+		}
 	}
 		
 	/**

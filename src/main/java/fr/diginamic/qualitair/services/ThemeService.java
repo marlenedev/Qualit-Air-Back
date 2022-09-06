@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import fr.diginamic.qualitair.dto.ThemeDto;
 import fr.diginamic.qualitair.entites.Theme;
 import fr.diginamic.qualitair.repository.ThemeRepository;
 
@@ -37,6 +39,18 @@ public class ThemeService {
 	 */
 	public Optional<Theme> findById(Integer id) {
 		return themeRepository.findById(id);
+	}
+	
+	/**
+	 * Ajouter un thème avec libellé
+	 * @param themeDto {}{@link ThemeDto}
+	 * @return sauvegarde du thème
+	 */
+	@Transactional
+	public Theme creerTheme(ThemeDto themeDto) {
+		Theme theme = new Theme();
+		theme.setLibelle(themeDto.getLibelle());
+		return themeRepository.save(theme);
 	}
 	
 	/**
