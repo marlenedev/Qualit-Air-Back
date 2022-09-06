@@ -1,7 +1,6 @@
 package fr.diginamic.qualitair.services;
 
 import fr.diginamic.qualitair.entites.Commune;
-import fr.diginamic.qualitair.entites.Theme;
 import fr.diginamic.qualitair.entites.Utilisateur;
 import fr.diginamic.qualitair.repository.UtilisateurRepository;
 import org.springframework.stereotype.Service;
