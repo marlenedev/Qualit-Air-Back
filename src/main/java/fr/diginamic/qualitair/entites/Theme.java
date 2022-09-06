@@ -4,6 +4,10 @@ import javax.persistence.*;
 
 import java.util.List;;
 
+/**
+ * Thème de fil de discussion
+ *
+ */
 @Entity
 @Table(name = "themes")
 public class Theme {
