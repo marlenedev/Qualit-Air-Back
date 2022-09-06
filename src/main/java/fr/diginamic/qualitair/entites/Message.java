@@ -75,8 +75,34 @@ public class Message {
     public Integer getNbReactions() {
         return nbReactions;
     }
+    
+    
 
-    public void setNbReactions(Integer nbReactions) {
+    public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
+
+	public FilDiscussion getFilDiscussion() {
+		return filDiscussion;
+	}
+
+	public void setFilDiscussion(FilDiscussion filDiscussion) {
+		this.filDiscussion = filDiscussion;
+	}
+
+	public Set<ReactionUtilisateur> getReactionsUtilisateurs() {
+		return reactionsUtilisateurs;
+	}
+
+	public void setReactionsUtilisateurs(Set<ReactionUtilisateur> reactionsUtilisateurs) {
+		this.reactionsUtilisateurs = reactionsUtilisateurs;
+	}
+
+	public void setNbReactions(Integer nbReactions) {
         this.nbReactions = nbReactions;
     }
 }

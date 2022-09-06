@@ -170,4 +170,53 @@ public class Utilisateur {
     public void setStatus(String status) {
         this.status = status;
     }
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Set<Favoris> getFavoris() {
+		return favoris;
+	}
+
+	public void setFavoris(Set<Favoris> favoris) {
+		this.favoris = favoris;
+	}
+
+	public Set<FilDiscussion> getFilDiscussion() {
+		return filDiscussion;
+	}
+
+	public void setFilDiscussion(Set<FilDiscussion> filDiscussion) {
+		this.filDiscussion = filDiscussion;
+	}
+
+	public Set<Message> getMessage() {
+		return message;
+	}
+
+	public void setMessage(Set<Message> message) {
+		this.message = message;
+	}
+
+	public Set<ReactionUtilisateur> getReactionUtilisateur() {
+		return reactionUtilisateur;
+	}
+
+	public void setReactionUtilisateur(Set<ReactionUtilisateur> reactionUtilisateur) {
+		this.reactionUtilisateur = reactionUtilisateur;
+	}
+
+	public Set<AlerteMail> getAlertesMails() {
+		return alertesMails;
+	}
+
+	public void setAlertesMails(Set<AlerteMail> alertesMails) {
+		this.alertesMails = alertesMails;
+	}
+    
 }
