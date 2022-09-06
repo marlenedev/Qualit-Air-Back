@@ -6,7 +6,7 @@
 | S002 | GET /discussions| X | => fil d'actualité
 | S003 | GET /messages| X | => détail discussion
 | S004 | POST /utilisateurs | X | => inscription
-| S005 | GET /utilisateurs/{id}|  | => authentification
+| S005 | GET /utilisateurs/{id}| X  | => authentification
 | S006 | GET /communes/{id}/historique-indicateurs?indicateurs={}&dateDebut={}&dateFin={}  |    |
 | S007 | POST /communes/{id}/historique-indicateurs?indicateurs={}&dateDebut={}&dateFin={} | |
 | S008 | GET /indicateurs?commune={commune}|  |
