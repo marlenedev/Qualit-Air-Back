@@ -2,10 +2,10 @@
 
 | ID   |      SERVICE      |  FAIT |
 |:----------:|-------------|:------:|
-| S001 | GET /themes|  | => thème
-| S002 | GET /discussions|  | => fil d'actualité
+| S001 | GET /themes| X | => thème
+| S002 | GET /discussions| X | => fil d'actualité
 | S003 | GET /messages|  | => détail discussion
-| S004 | POST /utilisateurs | | => inscription
+| S004 | POST /utilisateurs | X | => inscription
 | S005 | GET /utilisateurs/{id}|  | => authentification
 | S006 | GET /communes/{id}/historique-indicateurs?indicateurs={}&dateDebut={}&dateFin={}  |    |
 | S007 | POST /communes/{id}/historique-indicateurs?indicateurs={}&dateDebut={}&dateFin={} | |
@@ -18,7 +18,7 @@
 | S014 | POST /themes/{id}/discussions/{id}/messages/{id}/reactions/{id}  |    |
 | S015 | POST /themes/{id}/discussions/{id} | |
 | S016 | PATCH / utilisateurs/{id} |
-| S017 | DELETE / themes/{id} | |
+| S017 | DELETE / themes/{id} | X |
 | S018 | POST / themes | |
 | S019 | DELETE / themes/{id}/messages/{id} | |
 | S020 | PATCH / themes/{id}/messages/{id} | |
