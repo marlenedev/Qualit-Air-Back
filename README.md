@@ -4,7 +4,7 @@
 |:----------:|-------------|:------:|
 | S001 | GET /themes| X | => thème
 | S002 | GET /discussions| X | => fil d'actualité
-| S003 | GET /messages|  | => détail discussion
+| S003 | GET /messages| X | => détail discussion
 | S004 | POST /utilisateurs | X | => inscription
 | S005 | GET /utilisateurs/{id}|  | => authentification
 | S006 | GET /communes/{id}/historique-indicateurs?indicateurs={}&dateDebut={}&dateFin={}  |    |
@@ -19,7 +19,7 @@
 | S015 | POST /themes/{id}/discussions/{id} | |
 | S016 | PATCH / utilisateurs/{id} |
 | S017 | DELETE / themes/{id} | X |
-| S018 | POST / themes | |
+| S018 | POST / themes | X |
 | S019 | DELETE / themes/{id}/messages/{id} | |
 | S020 | PATCH / themes/{id}/messages/{id} | |
 | S021 | POST / themes/{id}/messsages/{id}| |
