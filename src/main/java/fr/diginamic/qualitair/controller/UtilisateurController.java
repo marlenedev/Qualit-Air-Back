@@ -18,6 +18,9 @@ public class UtilisateurController {
 
     public UtilisateurController(UtilisateurService utilisateurService) { this.utilisateurService = utilisateurService; }
 
+    /**
+     * Requête pour créer un utilisateur en appelant la méthode créée dans le service
+     */
     @PostMapping()
     public ResponseEntity<Utilisateur> enregistrementUtilisateur(@RequestBody UtilisateurDto utilisateurDto){
         return ResponseEntity.ok(utilisateurService.enregistrementUtilisateur(utilisateurDto.getNom(),
