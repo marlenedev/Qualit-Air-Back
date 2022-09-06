@@ -24,4 +24,10 @@ public class UtilisateurService {
         Utilisateur utilisateurEnregistre = findByEmail(email).orElse(new Utilisateur(nom, prenom, email, pseudo, region, commune, codePostal, mdpHashe ));
         return utilisateurRepository.save(utilisateurEnregistre);
     }
+
+    public Optional<Utilisateur> findById(Integer id) {
+        return utilisateurRepository.findById(id);
+    }
+
+
 }

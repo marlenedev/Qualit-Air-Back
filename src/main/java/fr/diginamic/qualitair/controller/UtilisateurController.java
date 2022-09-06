@@ -2,13 +2,13 @@ package fr.diginamic.qualitair.controller;
 
 
 import fr.diginamic.qualitair.dto.UtilisateurDto;
+import fr.diginamic.qualitair.entites.Theme;
 import fr.diginamic.qualitair.entites.Utilisateur;
 import fr.diginamic.qualitair.services.UtilisateurService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("utilisateurs")
@@ -31,5 +31,21 @@ public class UtilisateurController {
                                                                               utilisateurDto.getCommune(),
                                                                               utilisateurDto.getCodePostal(),
                                                                               utilisateurDto.getMdpHashe()));
+    }
+
+    /**
+     * Récupère un utilisateur selon son id
+     * @param id
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getOneUtilisateur(@RequestBody @PathVariable("id") Integer id){
+
+        Optional<Utilisateur> utilisateurTrouve = this.utilisateurService.findById(id);
+
+        if (utilisateurTrouve.isPresent()) {
+            return ResponseEntity.ok(utilisateurService.findById(id));
+        } else {
+            return ResponseEntity.status(400).body("L'utilisateur n'a pas été trouvé");
+        }
     }
 }
