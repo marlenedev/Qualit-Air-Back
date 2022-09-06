@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import fr.diginamic.qualitair.entites.Message;
 
 /**
- * Dto Messages (date , titre fil de discussion, pseudo de l'utilisateur, nb de vue, message)
+ * Dto Messages (date , titre fil de discussion, pseudo de l'utilisateur, nb de like, message)
  * */
 
 public class MessageDto {
@@ -14,12 +14,12 @@ public class MessageDto {
 	private String titre;
 	private LocalDateTime date;
 	private String message;
-	private Integer nbVue;
+	private Integer nbLike;
 	private String pseudo;
 	
 	
 	public static MessageDto from (Message message) {
-		return new MessageDto(message.getFilDiscussion().getTitre(), message.getDate(), message.getMessage(), message.getNbVues(), message.getUtilisateur().getPseudo());
+		return new MessageDto(message.getFilDiscussion().getTitre(), message.getDate(), message.getMessage(), message.getNbReactions(), message.getUtilisateur().getPseudo());
 	}
 	
 	
@@ -29,12 +29,12 @@ public class MessageDto {
 	}
 
 
-	public MessageDto(String titre, LocalDateTime date, String message, Integer nbVue, String pseudo) {
+	public MessageDto(String titre, LocalDateTime date, String message, Integer nbLike, String pseudo) {
 		super();
 		this.titre = titre;
 		this.date = date;
 		this.message = message;
-		this.nbVue = nbVue;
+		this.nbLike = nbLike;
 		this.pseudo = pseudo;
 	}
 
@@ -70,13 +70,13 @@ public class MessageDto {
 	}
 
 
-	public Integer getNbVue() {
-		return nbVue;
+	public Integer getNbLike() {
+		return nbLike;
 	}
 
 
-	public void setNbVue(Integer nbVue) {
-		this.nbVue = nbVue;
+	public void setNbLike(Integer nbVue) {
+		this.nbLike = nbVue;
 	}
 
 
