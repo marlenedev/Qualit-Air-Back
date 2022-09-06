@@ -1,6 +1,7 @@
 package fr.diginamic.qualitair.services;
 
 import fr.diginamic.qualitair.entites.Commune;
+import fr.diginamic.qualitair.entites.Theme;
 import fr.diginamic.qualitair.entites.Utilisateur;
 import fr.diginamic.qualitair.repository.UtilisateurRepository;
 import org.springframework.stereotype.Service;
@@ -24,4 +25,10 @@ public class UtilisateurService {
         Utilisateur utilisateurEnregistre = findByEmail(email).orElse(new Utilisateur(nom, prenom, email, pseudo, region, commune, codePostal, mdpHashe ));
         return utilisateurRepository.save(utilisateurEnregistre);
     }
+
+    public Optional<Utilisateur> findById(Integer id) {
+        return utilisateurRepository.findById(id);
+    }
+
+
 }
