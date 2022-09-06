@@ -16,6 +16,8 @@ public class FilDiscussion {
     private Integer id;
 
     private LocalDateTime dateCreation;
+    
+    private String titre;
 
     @JsonIgnore
     @ManyToOne
@@ -33,12 +35,30 @@ public class FilDiscussion {
     public FilDiscussion() {
     }
 
-    public FilDiscussion(Integer id, LocalDateTime dateCreation) {
-        this.id = id;
-        this.dateCreation = dateCreation;
-    }
+   
 
-    public Integer getId() {
+ 
+
+
+
+	public FilDiscussion(Integer id, LocalDateTime dateCreation, String titre, Utilisateur utilisateur, Theme theme,
+			Set<Message> messages) {
+		super();
+		this.id = id;
+		this.dateCreation = dateCreation;
+		this.titre = titre;
+		this.utilisateur = utilisateur;
+		this.theme = theme;
+		this.messages = messages;
+	}
+
+
+
+
+
+
+
+	public Integer getId() {
         return id;
     }
 
@@ -53,4 +73,41 @@ public class FilDiscussion {
     public void setDateCreation(LocalDateTime dateCreation) {
         this.dateCreation = dateCreation;
     }
+
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
+
+	public Theme getTheme() {
+		return theme;
+	}
+
+	public void setTheme(Theme theme) {
+		this.theme = theme;
+	}
+
+	public Set<Message> getMessages() {
+		return messages;
+	}
+
+	public void setMessages(Set<Message> messages) {
+		this.messages = messages;
+	}
+
+
+	public String getTitre() {
+		return titre;
+	}
+
+
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
+	
+	
+    
 }
