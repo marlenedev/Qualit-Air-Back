@@ -48,4 +48,16 @@ public class UtilisateurController {
             return ResponseEntity.status(400).body("L'utilisateur n'a pas été trouvé");
         }
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> supprimerUtilisateur(@PathVariable(value = "id") Integer id) {
+        Optional<Utilisateur> suppressionUtilisateur = this.utilisateurService.findById(id);
+        if (suppressionUtilisateur.isPresent()) {
+            Utilisateur utilisateurSupprime = suppressionUtilisateur.get();
+            this.utilisateurService.delete(utilisateurSupprime);
+            return ResponseEntity.status(200).body("L'utilisateur numéro " + id + " a été supprimé");
+        } else {
+            return ResponseEntity.status(400).body("L'utilisateur numéro" + id + " n'a pas pu être supprimé");
+        }
+    }
 }

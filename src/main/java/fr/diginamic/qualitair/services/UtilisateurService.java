@@ -1,6 +1,7 @@
 package fr.diginamic.qualitair.services;
 
 import fr.diginamic.qualitair.entites.Commune;
+import fr.diginamic.qualitair.entites.Theme;
 import fr.diginamic.qualitair.entites.Utilisateur;
 import fr.diginamic.qualitair.repository.UtilisateurRepository;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,10 @@ public class UtilisateurService {
 
     public Optional<Utilisateur> findById(Integer id) {
         return utilisateurRepository.findById(id);
+    }
+
+    public void delete(Utilisateur utilisateur) {
+        this.utilisateurRepository.delete(utilisateur);
     }
 
 
