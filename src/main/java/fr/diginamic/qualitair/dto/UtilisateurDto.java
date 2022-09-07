@@ -1,6 +1,7 @@
 package fr.diginamic.qualitair.dto;
 
 import fr.diginamic.qualitair.entites.Commune;
+import fr.diginamic.qualitair.entites.FilDiscussion;
 import fr.diginamic.qualitair.entites.Theme;
 import fr.diginamic.qualitair.entites.Utilisateur;
 
@@ -14,6 +15,11 @@ public class UtilisateurDto {
     private Commune commune;
     private String codePostal;
     private String mdpHashe;
+
+
+    public static UtilisateurDto from(Utilisateur utilisateur) {
+        return new UtilisateurDto(utilisateur.getNom(),utilisateur.getPrenom(),utilisateur.getEmail(),utilisateur.getPseudo(),utilisateur.getRegion(), utilisateur.getCommune(), utilisateur.getCodePostal(), utilisateur.getMdpHashe());
+    }
 
     public UtilisateurDto() {
     }

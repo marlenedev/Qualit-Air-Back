@@ -2,13 +2,16 @@ package fr.diginamic.qualitair.controller;
 
 
 import fr.diginamic.qualitair.dto.UtilisateurDto;
+import fr.diginamic.qualitair.entites.FilDiscussion;
 import fr.diginamic.qualitair.entites.Theme;
 import fr.diginamic.qualitair.entites.Utilisateur;
 import fr.diginamic.qualitair.services.UtilisateurService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("utilisateurs")
@@ -34,6 +37,15 @@ public class UtilisateurController {
     }
 
     /**
+     * Récupère la liste de tous les utilisateurs en base
+     * @return
+     */
+    @GetMapping()
+	public List<UtilisateurDto> listeUtilisateurs(){
+		return this.utilisateurService.findAll().stream().map(UtilisateurDto::from).collect(Collectors.toList());
+	}
+
+    /**
      * Récupère un utilisateur selon son id
      * @param id
      */
@@ -49,6 +61,11 @@ public class UtilisateurController {
         }
     }
 
+    /**
+     * Supprime un utilisateur selon son id
+     * @param id
+     * @return
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<?> supprimerUtilisateur(@PathVariable(value = "id") Integer id) {
         Optional<Utilisateur> suppressionUtilisateur = this.utilisateurService.findById(id);
