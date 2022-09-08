@@ -1,6 +1,7 @@
 package fr.diginamic.qualitair.dto;
 
 import fr.diginamic.qualitair.entites.Commune;
+import fr.diginamic.qualitair.entites.FilDiscussion;
 import fr.diginamic.qualitair.entites.Theme;
 import fr.diginamic.qualitair.entites.Utilisateur;
 
@@ -98,5 +99,5 @@ public class UtilisateurDto {
 
 	public void setMdpHashe(String mdpHashe) {
 		this.mdpHashe = mdpHashe;
-	}
+	}  
 }
