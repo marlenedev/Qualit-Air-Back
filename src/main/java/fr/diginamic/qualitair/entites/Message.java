@@ -1,6 +1,9 @@
 package fr.diginamic.qualitair.entites;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -18,10 +21,12 @@ public class Message {
     private Integer nbReactions;
 
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_utilisateur")
     private Utilisateur utilisateur;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_fil_discussion")
     private FilDiscussion filDiscussion;

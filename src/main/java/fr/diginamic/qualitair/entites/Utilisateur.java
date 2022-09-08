@@ -33,6 +33,7 @@ public class Utilisateur {
     @JoinColumn(name = "id_commune")
     private Commune commune;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "utilisateur")
     private Set<FilDiscussion> filDiscussion;
 
