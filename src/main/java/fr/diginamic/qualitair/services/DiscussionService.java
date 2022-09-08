@@ -9,16 +9,24 @@ import org.springframework.transaction.annotation.Transactional;
 
 import fr.diginamic.qualitair.dto.AjouterDiscussionDto;
 import fr.diginamic.qualitair.entites.FilDiscussion;
+import fr.diginamic.qualitair.entites.Theme;
+import fr.diginamic.qualitair.entites.Utilisateur;
 import fr.diginamic.qualitair.repository.DiscussionRepository;
+import fr.diginamic.qualitair.repository.ThemeRepository;
+import fr.diginamic.qualitair.repository.UtilisateurRepository;
 
 @Service
 public class DiscussionService {
 
 	private DiscussionRepository discussionRepository;
+	private UtilisateurRepository utilisateurRepository;
+	private ThemeService themeService;
 
-	public DiscussionService(DiscussionRepository discussionRepository) {
+	public DiscussionService(DiscussionRepository discussionRepository, UtilisateurRepository utilisateurRepository, ThemeService themeService) {
 		super();
 		this.discussionRepository = discussionRepository;
+		this.utilisateurRepository = utilisateurRepository;
+		this.themeService = themeService;
 	}
 
 	/**
@@ -44,11 +52,14 @@ public class DiscussionService {
 	 */
 	@Transactional
 	public FilDiscussion creerDiscussion(AjouterDiscussionDto ajouterFilDiscussionDto) {
+		Optional<Utilisateur> utilisateur = utilisateurRepository.findByEmail(ajouterFilDiscussionDto.getUtilisateur().getEmail());
+		Optional<Theme> theme = themeService.findById(ajouterFilDiscussionDto.getTheme().getId());
+		
 		FilDiscussion filDiscussion = new FilDiscussion();
 		filDiscussion.setDateCreation(LocalDateTime.now());
 		filDiscussion.setTitre(ajouterFilDiscussionDto.getTitre());
-		filDiscussion.setUtilisateur(ajouterFilDiscussionDto.getUtilisateur());
-		filDiscussion.setTheme(ajouterFilDiscussionDto.getTheme());
+		filDiscussion.setUtilisateur(utilisateur.get());
+		filDiscussion.setTheme(theme.get());
 		return discussionRepository.save(filDiscussion);
 	}
 

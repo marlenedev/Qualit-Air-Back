@@ -10,14 +10,14 @@ public class AjouterDiscussionDto {
 
 	private LocalDateTime dateCreation;
 	private String titre;
-	private Utilisateur utilisateur;
-	private Theme theme;
+	private UtilisateurDto utilisateur;
+	private ThemeDto theme;
 	
 	public static AjouterDiscussionDto from(FilDiscussion filDiscussion) {
-		return new AjouterDiscussionDto(filDiscussion.getDateCreation(), filDiscussion.getTitre(), filDiscussion.getUtilisateur(), filDiscussion.getTheme());
+		return new AjouterDiscussionDto(filDiscussion.getDateCreation(), filDiscussion.getTitre(), UtilisateurDto.from(filDiscussion.getUtilisateur()), ThemeDto.from(filDiscussion.getTheme()));
 	}
 
-	public AjouterDiscussionDto(LocalDateTime dateCreation, String titre, Utilisateur utilisateur, Theme theme) {
+	public AjouterDiscussionDto(LocalDateTime dateCreation, String titre, UtilisateurDto utilisateur, ThemeDto theme) {
 		super();
 		this.dateCreation = dateCreation;
 		this.titre = titre;
@@ -45,19 +45,19 @@ public class AjouterDiscussionDto {
 		this.titre = titre;
 	}
 
-	public Utilisateur getUtilisateur() {
+	public UtilisateurDto getUtilisateur() {
 		return utilisateur;
 	}
 
-	public void setUtilisateur(Utilisateur utilisateur) {
+	public void setUtilisateur(UtilisateurDto utilisateur) {
 		this.utilisateur = utilisateur;
 	}
 
-	public Theme getTheme() {
+	public ThemeDto getTheme() {
 		return theme;
 	}
 
-	public void setTheme(Theme theme) {
+	public void setTheme(ThemeDto theme) {
 		this.theme = theme;
 	}
 

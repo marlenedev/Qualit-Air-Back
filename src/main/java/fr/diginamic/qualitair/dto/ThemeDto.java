@@ -8,6 +8,7 @@ import fr.diginamic.qualitair.entites.Theme;
  */
 public class ThemeDto {
 
+	private Integer id;
 	private String libelle;
 
 	public static ThemeDto from(Theme theme) {
@@ -30,5 +31,12 @@ public class ThemeDto {
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
-	
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 }
