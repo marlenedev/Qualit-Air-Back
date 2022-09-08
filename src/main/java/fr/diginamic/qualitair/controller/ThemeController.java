@@ -31,10 +31,10 @@ public class ThemeController {
 	 * Lister tous les thèmes
 	 * @return liste de thèmes (dto)
 	 */
-	@GetMapping("themes")
-	public List<ThemeDto> listAll() {
-		return this.themeService.findAll().stream().map(ThemeDto::from).toList();
-	}
+//	@GetMapping("themes")
+//	public List<ThemeDto> listAll() {
+//		return this.themeService.findAll().stream().map(ThemeDto::from).toList();
+//	}
 	
 	/**
 	 * S018 POST/themes

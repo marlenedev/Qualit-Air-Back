@@ -1,10 +1,12 @@
 package fr.diginamic.qualitair.services;
 
+import fr.diginamic.qualitair.dto.UtilisateurDto;
 import fr.diginamic.qualitair.entites.Commune;
 import fr.diginamic.qualitair.entites.FilDiscussion;
 import fr.diginamic.qualitair.entites.Theme;
 import fr.diginamic.qualitair.entites.Utilisateur;
 import fr.diginamic.qualitair.repository.UtilisateurRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +20,7 @@ public class UtilisateurService {
     public UtilisateurService(UtilisateurRepository utilisateurRepository){ this.utilisateurRepository = utilisateurRepository; }
 
     public Optional<Utilisateur> findByEmail(String email){ return utilisateurRepository.findByEmail(email); }
+    public Utilisateur findByPseudo(String pseudo){ return utilisateurRepository.findByPseudo(pseudo); }
 
     /**
      * Méthode qui créé un nouvel utilisateur si sont email n'est pas trouvé en base
@@ -38,6 +41,21 @@ public class UtilisateurService {
 
     public List<Utilisateur> findAll(){
         return this.utilisateurRepository.findAll();
+    }
+
+    public Utilisateur modifierCollaborateur(String pseudo, UtilisateurDto utilisateurDto){
+
+        Utilisateur utilisateurModifie = findByPseudo(pseudo);
+
+        utilisateurModifie.setNom(utilisateurDto.getNom());
+        utilisateurModifie.setPrenom(utilisateurDto.getPrenom());
+        utilisateurModifie.setEmail(utilisateurDto.getEmail());
+        utilisateurModifie.setPseudo(utilisateurDto.getPseudo());
+        utilisateurModifie.setRegion(utilisateurDto.getRegion());
+        utilisateurModifie.setCommune(utilisateurDto.getCommune());
+        utilisateurModifie.setCodePostal(utilisateurDto.getCodePostal());
+
+        return utilisateurRepository.save(utilisateurModifie);
     }
 
 

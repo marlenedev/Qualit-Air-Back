@@ -21,9 +21,9 @@ public class FilDiscussionController {
 	 /**
 	  * Récupère les fils de discussion avec date/titre/nbMessage/utilisateur
 	  * */
-	@GetMapping("discussions")
-	public List<FilDiscussionDto> listAll(){
-		return this.discussionService.findAll().stream().map(FilDiscussionDto::from).toList();
-	}
-	
+//	@GetMapping("discussions")
+//	public List<FilDiscussionDto> listAll(){
+//		return this.discussionService.findAll().stream().map(FilDiscussionDto::from).toList();
+//	}
+//
 }

@@ -77,4 +77,17 @@ public class UtilisateurController {
             return ResponseEntity.status(400).body("L'utilisateur numéro" + id + " n'a pas pu être supprimé");
         }
     }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<?> updateInformationsUser(@RequestBody @PathVariable("id") Integer id){
+//        Optional<Utilisateur> modificationUtilisateur = this.utilisateurService.findById(id);
+//        if (modificationUtilisateur.isPresent()) {
+//            Utilisateur utilisateurSupprime = suppressionUtilisateur.get();
+//            this.utilisateurService.delete(utilisateurSupprime);
+//            return ResponseEntity.status(200).body("L'utilisateur numéro " + id + " a été supprimé");
+//        } else {
+//            return ResponseEntity.status(400).body("L'utilisateur numéro" + id + " n'a pas pu être supprimé");
+//        }
+        return null;
+    }
 }
