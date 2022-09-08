@@ -12,7 +12,6 @@ import fr.diginamic.qualitair.entites.FilDiscussion;
 import fr.diginamic.qualitair.entites.Theme;
 import fr.diginamic.qualitair.entites.Utilisateur;
 import fr.diginamic.qualitair.repository.DiscussionRepository;
-import fr.diginamic.qualitair.repository.ThemeRepository;
 import fr.diginamic.qualitair.repository.UtilisateurRepository;
 
 @Service
@@ -47,11 +46,12 @@ public class DiscussionService {
 
 	/**
 	 * Ajouter un fil de discussion avec date de création, titre, utilisateur, thème
-	 * @param themeDto {}{@link AjouterDiscussionDto}
+	 * @param ajouterDiscussionDto {@link AjouterDiscussionDto}
 	 * @return sauvegarde du fil de discussion
 	 */
 	@Transactional
 	public FilDiscussion creerDiscussion(AjouterDiscussionDto ajouterFilDiscussionDto) {
+		// TODO à remplacer par Spring Security config
 		Optional<Utilisateur> utilisateur = utilisateurRepository.findByEmail(ajouterFilDiscussionDto.getUtilisateur().getEmail());
 		Optional<Theme> theme = themeService.findById(ajouterFilDiscussionDto.getTheme().getId());
 		
