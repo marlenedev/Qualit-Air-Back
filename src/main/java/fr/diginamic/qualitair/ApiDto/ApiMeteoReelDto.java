@@ -2,27 +2,8 @@ package fr.diginamic.qualitair.ApiDto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-//{
-//    "coord": {
-//        "lon": -1.5541,
-//        "lat": 47.2186
-//    },
-//    "weather": [
-//        {
-//            "id": 500,
-//            "main": "Rain",
-//            "description": "light rain",
-//            "icon": "10d"
-//        }
-//    ],
-//    "main": {
-//        "temp": 21.26,
-//        "feels_like": 21.35,
-//        "temp_min": 20.1,
-//        "temp_max": 22.15,
-//        "pressure": 1011,
-//        "humidity": 73
-//    },
+// Dto Api Current Weather Data
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ApiMeteoReelDto {
 	

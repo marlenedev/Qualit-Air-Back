@@ -1,12 +1,6 @@
 package fr.diginamic.qualitair.ApiDto;
-//{
-//    "zip": "44000",
-//    "name": "Nantes",
-//    "lat": 47.2173,
-//    "lon": -1.5534,
-//    "country": "FR"
-//}
 
+// Dto Api Geocoding
 public class ApiCommuneDto {
 	
 	private String zip;

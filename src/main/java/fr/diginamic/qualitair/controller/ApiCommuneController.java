@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import fr.diginamic.qualitair.ApiDto.ApiCommuneAvecMeteoDto;
 import fr.diginamic.qualitair.ApiDto.ApiCommuneDto;
 import fr.diginamic.qualitair.ApiDto.ApiMeteoReelDto;
 import fr.diginamic.qualitair.services.WebApiService;
@@ -19,15 +20,16 @@ public class ApiCommuneController {
 		super();
 		this.webApiService = webApiService;
 	}
-	
+
+	// Récupère les infos météo d'une commune suivant son code postal 
 	@GetMapping("commune")
-	public ApiCommuneDto getInfoCommune (@RequestParam(value="codePostal") String codePostal) {
-		return webApiService.getInfoCommune(codePostal);
+	public ApiCommuneAvecMeteoDto getInfoCommune (@RequestParam(value="codePostal") String codePostal) {
+		var commune = webApiService.getInfoCommune(codePostal);
+		var meteo = webApiService.getInfoMeteoCommune(commune.getLat(), commune.getLon());
+		return new ApiCommuneAvecMeteoDto(commune, meteo);
 	}
 	
-	@GetMapping("communeMeteo")
-	public ApiMeteoReelDto getInfoMeteoCommune(@RequestParam(value="lat") Double lat, @RequestParam (value="lon")Double lon) {
-		return webApiService.getInfoMeteoCommune(lat, lon);
-	}
+	
+	
 
 }
