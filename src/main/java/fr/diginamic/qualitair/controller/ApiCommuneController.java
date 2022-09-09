@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.diginamic.qualitair.ApiDto.ApiCommuneAvecMeteoDto;
+import fr.diginamic.qualitair.apiDto.ApiCommuneAvecMeteoDto;
 import fr.diginamic.qualitair.services.WebApiService;
 
 @RestController

@@ -1,4 +1,4 @@
-package fr.diginamic.qualitair.ApiDto;
+package fr.diginamic.qualitair.apiDto;
 
 // Dto Api Geocoding
 public class ApiCommuneDto {

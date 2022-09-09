@@ -1,4 +1,4 @@
-package fr.diginamic.qualitair.ApiDto;
+package fr.diginamic.qualitair.apiDto;
 
 public class ApiCommuneAvecMeteoDto {
 	private ApiCommuneDto commune;

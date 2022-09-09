@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import fr.diginamic.qualitair.ApiDto.ApiCommuneDto;
-import fr.diginamic.qualitair.ApiDto.ApiMeteoReelDto;
+import fr.diginamic.qualitair.apiDto.ApiCommuneDto;
+import fr.diginamic.qualitair.apiDto.ApiMeteoReelDto;
 
 @Service
 public class WebApiService {
