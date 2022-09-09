@@ -1,5 +1,6 @@
 package fr.diginamic.qualitair.services;
 
+import fr.diginamic.qualitair.dto.ModificationUserDto;
 import fr.diginamic.qualitair.dto.UtilisateurDto;
 import fr.diginamic.qualitair.entites.Commune;
 import fr.diginamic.qualitair.entites.FilDiscussion;
@@ -43,20 +44,28 @@ public class UtilisateurService {
         return this.utilisateurRepository.findAll();
     }
 
-    public Utilisateur modifierCollaborateur(String pseudo, UtilisateurDto utilisateurDto){
 
-        Utilisateur utilisateurModifie = findByPseudo(pseudo);
+    /**
+     * Modifie les informations d'un utilisateur
+     * @param modificationUserDto
+     * @param id
+     * @return
+     */
+    public Utilisateur modifierUtilisateur(ModificationUserDto modificationUserDto, Integer id){
 
-        utilisateurModifie.setNom(utilisateurDto.getNom());
-        utilisateurModifie.setPrenom(utilisateurDto.getPrenom());
-        utilisateurModifie.setEmail(utilisateurDto.getEmail());
-        utilisateurModifie.setPseudo(utilisateurDto.getPseudo());
-        utilisateurModifie.setRegion(utilisateurDto.getRegion());
-        utilisateurModifie.setCommune(utilisateurDto.getCommune());
-        utilisateurModifie.setCodePostal(utilisateurDto.getCodePostal());
+        Optional<Utilisateur> utilisateurModifie = findById(id);
 
-        return utilisateurRepository.save(utilisateurModifie);
+        Utilisateur utilisateur = utilisateurModifie.get();
+
+        utilisateur.setNom(modificationUserDto.getNom());
+        utilisateur.setPrenom(modificationUserDto.getPrenom());
+        utilisateur.setEmail(modificationUserDto.getEmail());
+        utilisateur.setPseudo(modificationUserDto.getPseudo());
+        utilisateur.setRegion(modificationUserDto.getRegion());
+        utilisateur.setCommune(modificationUserDto.getCommune());
+        utilisateur.setCodePostal(modificationUserDto.getCodePostal());
+
+        return utilisateurRepository.save(utilisateur);
+
     }
-
-
 }
