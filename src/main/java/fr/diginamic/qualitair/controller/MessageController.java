@@ -21,9 +21,9 @@ public class MessageController {
 	/**
 	  * Récupère les messages avec date/titre fil discussion /nb de like/ pseudo
 	  * */
-//	@GetMapping("messages")
-//	public List<MessageDto> listAll(){
-//		return this.messageService.findAll().stream().map(MessageDto::from).toList();
-//	}
+	@GetMapping("messages")
+	public List<MessageDto> listAll(){
+		return this.messageService.findAll().stream().map(MessageDto::from).toList();
+	}
 
 }
