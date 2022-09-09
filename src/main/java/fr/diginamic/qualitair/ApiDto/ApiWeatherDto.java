@@ -1,4 +1,4 @@
-package fr.diginamic.qualitair.Api.Dto;
+package fr.diginamic.qualitair.ApiDto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
