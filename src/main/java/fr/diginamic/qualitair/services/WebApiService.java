@@ -4,7 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import fr.diginamic.qualitair.dto.ApiCommuneDto;
+import fr.diginamic.qualitair.Api.Dto.ApiCommuneDto;
+import fr.diginamic.qualitair.Api.Dto.ApiMeteoReelDto;
 
 @Service
 public class WebApiService {
@@ -18,4 +19,9 @@ public class WebApiService {
 		return restTemplate.getForObject("http://api.openweathermap.org/geo/1.0/zip?zip={zip code},{country code}&appid={API key}", ApiCommuneDto.class,codePostal,"FR",appid);
 	}
 
+	
+	public ApiMeteoReelDto getInfoMeteoCommune (Double lat, Double lon) {
+		return restTemplate.getForObject("http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}&units={units}&lang={lang}", ApiMeteoReelDto.class,lat,lon,appid,"metric","FR");
+
+	}
 }

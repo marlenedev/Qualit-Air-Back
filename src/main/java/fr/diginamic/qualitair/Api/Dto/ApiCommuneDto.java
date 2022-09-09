@@ -1,4 +1,4 @@
-package fr.diginamic.qualitair.dto;
+package fr.diginamic.qualitair.Api.Dto;
 //{
 //    "zip": "44000",
 //    "name": "Nantes",
