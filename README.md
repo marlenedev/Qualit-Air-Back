@@ -9,7 +9,7 @@
 | S005 | GET /utilisateurs/{id}| X  | => authentification
 | S006 | GET /communes/{id}/historique-indicateurs?indicateurs={}&dateDebut={}&dateFin={}  |    |
 | S007 | POST /communes/{id}/historique-indicateurs?indicateurs={}&dateDebut={}&dateFin={} | |
-| S008 | GET /indicateurs?commune={commune}|  |
+| S008 | GET /indicateurs?commune={commune}| X  |
 | S009 | GET /utilisateurs/{id}/favoris  |    |
 | S010 | POST /utilisateurs/{id}/favoris | |
 | S011 | DELETE /utilisateurs/{id}/favoris/{id}| |
