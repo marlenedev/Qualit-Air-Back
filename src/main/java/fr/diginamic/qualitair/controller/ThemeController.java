@@ -9,21 +9,29 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import fr.diginamic.qualitair.dto.AjouterDiscussionDto;
 import fr.diginamic.qualitair.dto.ThemeDto;
+import fr.diginamic.qualitair.entites.FilDiscussion;
 import fr.diginamic.qualitair.entites.Theme;
+import fr.diginamic.qualitair.exception.CreerDiscussionException;
 import fr.diginamic.qualitair.exception.CreerThemeException;
+import fr.diginamic.qualitair.services.DiscussionService;
 import fr.diginamic.qualitair.services.ThemeService;
 
 @RestController
+@RequestMapping("themes")
 public class ThemeController {
 
 	private ThemeService themeService;
+	private DiscussionService discussionService;
 
-	public ThemeController(ThemeService themeService) {
+	public ThemeController(ThemeService themeService, DiscussionService discussionService) {
 		super();
 		this.themeService = themeService;
+		this.discussionService = discussionService;
 	}
 
 	/**
@@ -31,33 +39,33 @@ public class ThemeController {
 	 * Lister tous les thèmes
 	 * @return liste de thèmes (dto)
 	 */
-	@GetMapping("themes")
+	@GetMapping
 	public List<ThemeDto> listAll() {
 		return this.themeService.findAll().stream().map(ThemeDto::from).toList();
 	}
-	
+
 	/**
-	 * S018 POST/themes
+	 * S018 POST/themes 
 	 * Ajouter un thème avec un libellé
 	 * @param themeDto
 	 * @return si réussi : nouveau instance de {@link ThemeDto} / sinon erreur 400
 	 */
-	@PostMapping("themes")
+	@PostMapping
 	public ResponseEntity<?> creerTheme(@RequestBody ThemeDto themeDto) {
 		try {
-		Theme nouveauTheme = themeService.creerTheme(themeDto);
-		return ResponseEntity.status(200).body(nouveauTheme);
-		} catch(CreerThemeException e) {
+			Theme nouveauTheme = themeService.creerTheme(themeDto);
+			return ResponseEntity.status(200).body(nouveauTheme);
+		} catch (CreerThemeException e) {
 			return ResponseEntity.status(400).body("Le thème n'a pas pu être créé");
 		}
 	}
-		
+
 	/**
-	 * S017 DELETE/themes/{id}
+	 * S017 DELETE/themes/{id} 
 	 * Supprimer un theme
 	 * @param id Integer id du {@link Theme} à supprimer
 	 */
-	@DeleteMapping("themes/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<?> supprimerTheme(@PathVariable(value = "id") Integer id) {
 		Optional<Theme> optTheme = this.themeService.findById(id);
 		if (optTheme.isPresent()) {
@@ -68,4 +76,23 @@ public class ThemeController {
 			return ResponseEntity.status(400).body("Le thème no." + id + " n'a pas pu être supprimé");
 		}
 	}
+
+	/**
+	 * S015 POST/themes/{id}/discussions 
+	 * Ajouter un fil de discussion
+	 * @param id
+	 * @param ajouterFilDiscussionDto
+	 * @return si réussi : nouveau instance de {@link AjouterDiscussionDto} / sinon erreur 400
+	 */
+	@PostMapping("/{id}/discussions")
+	public ResponseEntity<?> ajouterDiscussionATheme(@PathVariable(name = "id") Integer id,
+			@RequestBody AjouterDiscussionDto ajouterFilDiscussionDto) {
+		try {
+			FilDiscussion nouveauFil = discussionService.creerDiscussion(ajouterFilDiscussionDto);
+			return ResponseEntity.status(200).body(nouveauFil);
+		} catch (CreerDiscussionException e) {
+			return ResponseEntity.status(400).body("La discussion n'a pas pu être créée");
+		}
+	}
+
 }
