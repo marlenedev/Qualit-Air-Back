@@ -13,11 +13,11 @@
 | S009 | GET /utilisateurs/{id}/favoris  |    |
 | S010 | POST /utilisateurs/{id}/favoris | |
 | S011 | DELETE /utilisateurs/{id}/favoris/{id}| |
-| S012 | POST /themes/{id}/discussions/{id}/messages/{id}|  |
+| S012 | POST /themes/{id}/discussions/{id}/messages/{id} | X |
 | S013 | PUT /themes/{id}/discussions/{id}/messages/{id}/reactions/{id}  |    |
 | S014 | POST /themes/{id}/discussions/{id}/messages/{id}/reactions/{id}  |    |
 | S015 | POST /themes/{id}/discussions | X |
-| S016 | PATCH / utilisateurs/{id} |
+| S016 | PATCH / utilisateurs/{id} | X |
 | S017 | DELETE / themes/{id} | X |
 | S018 | POST / themes | X |
 | S019 | DELETE / themes/{id}/messages/{id} | |
