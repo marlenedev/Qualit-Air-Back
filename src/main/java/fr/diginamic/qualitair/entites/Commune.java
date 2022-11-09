@@ -14,7 +14,7 @@ public class Commune {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String commune;
+    private String nom;
     private Long nbHabitants;
     private String codeDpt;
     private String nomRegion;
@@ -31,9 +31,9 @@ public class Commune {
     public Commune() {
     }
 
-    public Commune(Integer id, String commune, Long nbHabitants, String codeDpt, String nomRegion) {
+    public Commune(Integer id, String nom, Long nbHabitants, String codeDpt, String nomRegion) {
         this.id = id;
-        this.commune = commune;
+        this.nom = nom;
         this.nbHabitants = nbHabitants;
         this.codeDpt = codeDpt;
         this.nomRegion = nomRegion;
@@ -47,12 +47,12 @@ public class Commune {
         this.id = id;
     }
 
-    public String getCommune() {
-        return commune;
+    public String getNom() {
+        return nom;
     }
 
-    public void setCommune(String commune) {
-        this.commune = commune;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
     public Long getNbHabitants() {

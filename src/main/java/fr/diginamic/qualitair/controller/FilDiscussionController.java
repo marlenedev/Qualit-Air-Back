@@ -73,5 +73,4 @@ public class FilDiscussionController {
 			return ResponseEntity.status(400).body("Le message n'a pas pu être crée");
 		}
 	}
-
 }
