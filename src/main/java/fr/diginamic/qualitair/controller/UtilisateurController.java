@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("utilisateurs")
+@CrossOrigin
 public class UtilisateurController {
 
     UtilisateurService utilisateurService;

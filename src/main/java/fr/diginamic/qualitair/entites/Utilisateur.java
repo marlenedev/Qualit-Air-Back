@@ -22,7 +22,8 @@ public class Utilisateur {
     private String mdpHashe;
     private String pseudo;
     private boolean alertes;
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private RolesEnum role;
     private String status;
 
     @OneToMany(mappedBy = "utilisateur")
@@ -48,7 +49,7 @@ public class Utilisateur {
     public Utilisateur() {
     }
 
-    public Utilisateur(Integer id, String nom, String prenom, String codePostal, String dept, String region, String email, String mdpHashe, String pseudo, boolean alertes, String role, String status, Commune commune) {
+    public Utilisateur(Integer id, String nom, String prenom, String codePostal, String dept, String region, String email, String mdpHashe, String pseudo, boolean alertes, RolesEnum role, String status, Commune commune) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -155,11 +156,11 @@ public class Utilisateur {
         this.alertes = alertes;
     }
 
-    public String getRole() {
+    public RolesEnum getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(RolesEnum role) {
         this.role = role;
     }
 

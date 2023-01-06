@@ -39,6 +39,13 @@ public class Commune {
         this.nomRegion = nomRegion;
     }
 
+    public Commune(String commune, Long nbHabitants, String codeDpt, String nomRegion) {
+        this.commune = commune;
+        this.nbHabitants = nbHabitants;
+        this.codeDpt = codeDpt;
+        this.nomRegion = nomRegion;
+    }
+
     public Integer getId() {
         return id;
     }

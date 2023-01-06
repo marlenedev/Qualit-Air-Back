@@ -1,6 +1,7 @@
 package fr.diginamic.qualitair.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,7 +24,7 @@ public class FilDiscussionController {
 	  * */
 	@GetMapping("discussions")
 	public List<FilDiscussionDto> listAll(){
-		return this.discussionService.findAll().stream().map(FilDiscussionDto::from).toList();
+		return this.discussionService.findAll().stream().map(FilDiscussionDto::from).collect(Collectors.toList());
 	}
 	
 }
