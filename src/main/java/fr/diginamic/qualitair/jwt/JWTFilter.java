@@ -33,25 +33,27 @@ public class JWTFilter extends GenericFilterBean {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
             throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
+        System.out.println("Toto");
         String jwt = resolveToken(httpServletRequest);
-
-        logger.debug("]]]]]]]]]]]]]]]]]]");
-        logger.debug("token {}",  jwt);
-        logger.debug("hasText {}", StringUtils.hasText(jwt));
-        logger.debug("validate {}", this.jwtTokenProvider.validateToken(jwt));
-
-        if (StringUtils.hasText(jwt) && this.jwtTokenProvider.validateToken(jwt)) {
-            Authentication authentication = this.jwtTokenProvider.getAuthentication(jwt);
-
-            logger.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-            logger.debug("isAuth {}", authentication.isAuthenticated());
-            logger.debug("name {}", authentication.getName());
-            logger.debug("cred {}", authentication.getCredentials());
-            logger.debug("det {}", authentication.getDetails());
-
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-        }
-        filterChain.doFilter(servletRequest, servletResponse);
+        System.out.println("Toto");
+        return ;
+//        logger.debug("]]]]]]]]]]]]]]]]]]");
+//        logger.debug("token {}",  jwt);
+//        logger.debug("hasText {}", StringUtils.hasText(jwt));
+//        logger.debug("validate {}", this.jwtTokenProvider.validateToken(jwt));
+//
+//        if (StringUtils.hasText(jwt) && this.jwtTokenProvider.validateToken(jwt)) {
+//            Authentication authentication = this.jwtTokenProvider.getAuthentication(jwt);
+//
+//            logger.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+//            logger.debug("isAuth {}", authentication.isAuthenticated());
+//            logger.debug("name {}", authentication.getName());
+//            logger.debug("cred {}", authentication.getCredentials());
+//            logger.debug("det {}", authentication.getDetails());
+//
+//            SecurityContextHolder.getContext().setAuthentication(authentication);
+//        }
+//        filterChain.doFilter(servletRequest, servletResponse);
     }
 
     private String resolveToken(HttpServletRequest request) {

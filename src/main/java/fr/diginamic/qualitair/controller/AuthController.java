@@ -3,6 +3,7 @@ package fr.diginamic.qualitair.controller;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.diginamic.qualitair.jwt.JWTTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
@@ -34,18 +35,22 @@ public class AuthController {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                 login, mdp
         );
+        String jwt = "";
+        try {
+            Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            // Creation du token avec login et droit
+            var roles = userDetailsService.loadUserByUsername(login)
+                    .getAuthorities()
+                    .stream()
+                    .map(GrantedAuthority::getAuthority)
+                    .collect(Collectors.toList());
 
-        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+            jwt = jwtTokenProvider.createToken(authentication.getName(), roles);
 
-        // Creation du token avec login et droit
-        var roles = userDetailsService.loadUserByUsername(login)
-                .getAuthorities()
-                .stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.toList());
-
-        String jwt = jwtTokenProvider.createToken(authentication.getName(), roles);
+        }catch(BadCredentialsException e){
+            e.printStackTrace();
+        }
 
         return new JWTToken(jwt);
     }

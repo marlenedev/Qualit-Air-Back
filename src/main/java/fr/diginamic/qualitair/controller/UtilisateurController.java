@@ -6,7 +6,10 @@ import fr.diginamic.qualitair.entites.FilDiscussion;
 import fr.diginamic.qualitair.entites.Theme;
 import fr.diginamic.qualitair.entites.Utilisateur;
 import fr.diginamic.qualitair.services.UtilisateurService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +21,11 @@ import java.util.stream.Collectors;
 @CrossOrigin
 public class UtilisateurController {
 
+    @Autowired
     UtilisateurService utilisateurService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public UtilisateurController(UtilisateurService utilisateurService) { this.utilisateurService = utilisateurService; }
 
@@ -34,7 +41,7 @@ public class UtilisateurController {
                                                                               utilisateurDto.getRegion(),
                                                                               utilisateurDto.getCommune(),
                                                                               utilisateurDto.getCodePostal(),
-                                                                              utilisateurDto.getMdpHashe()));
+                                                                              passwordEncoder.encode(utilisateurDto.getMdpHashe())));
     }
 
     /**
@@ -67,7 +74,7 @@ public class UtilisateurController {
      * @param id
      * @return
      */
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> supprimerUtilisateur(@PathVariable(value = "id") Integer id) {
         Optional<Utilisateur> suppressionUtilisateur = this.utilisateurService.findById(id);
         if (suppressionUtilisateur.isPresent()) {
