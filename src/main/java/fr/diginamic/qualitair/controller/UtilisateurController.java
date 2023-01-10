@@ -34,14 +34,7 @@ public class UtilisateurController {
      */
     @PostMapping()
     public ResponseEntity<Utilisateur> enregistrementUtilisateur(@RequestBody UtilisateurDto utilisateurDto){
-        return ResponseEntity.ok(utilisateurService.enregistrementUtilisateur(utilisateurDto.getNom(),
-                                                                              utilisateurDto.getPrenom(),
-                                                                              utilisateurDto.getEmail(),
-                                                                              utilisateurDto.getPseudo(),
-                                                                              utilisateurDto.getRegion(),
-                                                                              utilisateurDto.getCommune(),
-                                                                              utilisateurDto.getCodePostal(),
-                                                                              passwordEncoder.encode(utilisateurDto.getMdpHashe())));
+        return ResponseEntity.ok(utilisateurService.enregistrementUtilisateur(utilisateurDto));
     }
 
     /**
