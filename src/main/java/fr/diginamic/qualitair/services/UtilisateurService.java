@@ -42,7 +42,7 @@ public class UtilisateurService {
         utilisateurEnregistre.setCommune(utilisateurDto.getCommune());
         utilisateurEnregistre.setCodePostal(utilisateurDto.getCodePostal());
         utilisateurEnregistre.setMdpHashe(passwordEncoder.encode(utilisateurDto.getMdpHashe()));
-        utilisateurEnregistre.setRole(utilisateurDto.getRole());
+        utilisateurEnregistre.setRole(RolesEnum.USER);
 
         return utilisateurRepository.save(utilisateurEnregistre);
     }

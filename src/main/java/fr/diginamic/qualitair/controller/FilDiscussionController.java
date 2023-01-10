@@ -2,6 +2,7 @@ package fr.diginamic.qualitair.controller;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,6 +10,7 @@ import fr.diginamic.qualitair.dto.FilDiscussionDto;
 import fr.diginamic.qualitair.services.DiscussionService;
 
 @RestController
+@CrossOrigin
 public class FilDiscussionController {
 
 	private DiscussionService discussionService;
