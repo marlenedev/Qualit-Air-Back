@@ -20,7 +20,10 @@ public class Utilisateur {
     private String region;
     private String email;
     private String mdpHashe;
+
+    @Column(unique = true)
     private String pseudo;
+
     private boolean alertes;
     @Enumerated(EnumType.STRING)
     private RolesEnum role;
