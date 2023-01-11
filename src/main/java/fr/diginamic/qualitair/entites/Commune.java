@@ -16,7 +16,7 @@ public class Commune {
 
     @JsonIgnore
     private String commune;
-
+    
     private Long nbHabitants;
     private String codeDpt;
     private String nomRegion;
@@ -33,9 +33,9 @@ public class Commune {
     public Commune() {
     }
 
-    public Commune(Integer id, String commune, Long nbHabitants, String codeDpt, String nomRegion) {
+    public Commune(Integer id, String nom, Long nbHabitants, String codeDpt, String nomRegion) {
         this.id = id;
-        this.commune = commune;
+        this.nom = nom;
         this.nbHabitants = nbHabitants;
         this.codeDpt = codeDpt;
         this.nomRegion = nomRegion;

@@ -1,8 +1,8 @@
 package fr.diginamic.qualitair.dto;
 
-import fr.diginamic.qualitair.entites.*;
+import fr.diginamic.qualitair.entites.Commune;
 
-public class UtilisateurDto {
+public class ModificationUserDto {
 
     private String nom;
     private String prenom;
@@ -11,18 +11,8 @@ public class UtilisateurDto {
     private String region;
     private Commune commune;
     private String codePostal;
-    private String mdpHashe;
-    private RolesEnum role;
 
-
-    public static UtilisateurDto from(Utilisateur utilisateur) {
-        return new UtilisateurDto(utilisateur.getNom(),utilisateur.getPrenom(),utilisateur.getEmail(),utilisateur.getPseudo(),utilisateur.getRegion(), utilisateur.getCommune(), utilisateur.getCodePostal(), utilisateur.getMdpHashe(), utilisateur.getRole());
-    }
-
-    public UtilisateurDto() {
-    }
-
-    public UtilisateurDto(String nom, String prenom, String email, String pseudo, String region, Commune commune, String codePostal, String mdpHashe, RolesEnum role) {
+    public ModificationUserDto(String nom, String prenom, String email, String pseudo, String region, Commune commune, String codePostal) {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
@@ -30,8 +20,6 @@ public class UtilisateurDto {
         this.region = region;
         this.commune = commune;
         this.codePostal = codePostal;
-        this.mdpHashe = mdpHashe;
-        this.role = role;
     }
 
     public String getNom() {
@@ -89,21 +77,4 @@ public class UtilisateurDto {
     public void setCodePostal(String codePostal) {
         this.codePostal = codePostal;
     }
-
-    public String getMdpHashe() {
-        return mdpHashe;
-    }
-
-    public void setMdpHashe(String mdpHashe) {
-        this.mdpHashe = mdpHashe;
-    }
-
-    public RolesEnum getRole() {
-        return role;
-    }
-
-    public void setRole(RolesEnum role) {
-        this.role = role;
-    }
-
 }

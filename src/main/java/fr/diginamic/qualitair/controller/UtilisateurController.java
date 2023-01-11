@@ -1,6 +1,7 @@
 package fr.diginamic.qualitair.controller;
 
 
+import fr.diginamic.qualitair.dto.ModificationUserDto;
 import fr.diginamic.qualitair.dto.UtilisateurDto;
 import fr.diginamic.qualitair.entites.FilDiscussion;
 import fr.diginamic.qualitair.entites.Theme;
@@ -77,5 +78,10 @@ public class UtilisateurController {
         } else {
             return ResponseEntity.status(400).body("L'utilisateur numéro" + id + " n'a pas pu être supprimé");
         }
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<?> updateInformationsUser(@RequestBody ModificationUserDto modificationUserDto, @PathVariable Integer id){
+        return ResponseEntity.ok(this.utilisateurService.modifierUtilisateur(modificationUserDto, id));
     }
 }
