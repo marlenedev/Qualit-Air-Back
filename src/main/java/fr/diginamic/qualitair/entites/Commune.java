@@ -33,9 +33,9 @@ public class Commune {
     public Commune() {
     }
 
-    public Commune(Integer id, String nom, Long nbHabitants, String codeDpt, String nomRegion) {
+    public Commune(Integer id, String commune, Long nbHabitants, String codeDpt, String nomRegion) {
         this.id = id;
-        this.nom = nom;
+        this.commune = commune;
         this.nbHabitants = nbHabitants;
         this.codeDpt = codeDpt;
         this.nomRegion = nomRegion;
