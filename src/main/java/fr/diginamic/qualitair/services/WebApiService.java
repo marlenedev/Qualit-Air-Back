@@ -6,6 +6,7 @@ import org.springframework.web.client.RestTemplate;
 
 import fr.diginamic.qualitair.apiDto.ApiCommuneDto;
 import fr.diginamic.qualitair.apiDto.ApiMeteoReelDto;
+import fr.diginamic.qualitair.apiDto.ApiPollutionDto;
 
 @Service
 public class WebApiService {
@@ -22,6 +23,12 @@ public class WebApiService {
 	// Api Current Weather Data
 	public ApiMeteoReelDto getInfoMeteoCommune (Double lat, Double lon) {
 		return restTemplate.getForObject("http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}&units={units}&lang={lang}", ApiMeteoReelDto.class,lat,lon,appid,"metric","FR");
+
+	}
+	
+	// Api Air Pollution
+	public ApiPollutionDto getInfoPollutionCommune (Double lat, Double lon) {
+		return restTemplate.getForObject("http://api.openweathermap.org/data/2.5/air_pollution?lat={lat}&lon={lon}&appid={API key}", ApiPollutionDto.class,lat,lon,appid);
 
 	}
 	
