@@ -1,103 +1,109 @@
 package fr.diginamic.qualitair.dto;
 
-import fr.diginamic.qualitair.entites.Commune;
-import fr.diginamic.qualitair.entites.FilDiscussion;
-import fr.diginamic.qualitair.entites.Theme;
-import fr.diginamic.qualitair.entites.Utilisateur;
+import fr.diginamic.qualitair.entites.*;
 
 public class UtilisateurDto {
 
-	private String nom;
-	private String prenom;
-	private String email;
-	private String pseudo;
-	private String region;
-	private Commune commune;
-	private String codePostal;
-	private String mdpHashe;
+    private String nom;
+    private String prenom;
+    private String email;
+    private String pseudo;
+    private String region;
+    private Commune commune;
+    private String codePostal;
+    private String mdpHashe;
+    private RolesEnum role;
 
-	public static UtilisateurDto from(Utilisateur utilisateur) {
-		return new UtilisateurDto(utilisateur.getNom(), utilisateur.getPrenom(), utilisateur.getEmail(),
-				utilisateur.getPseudo(), utilisateur.getRegion(), utilisateur.getCommune(), utilisateur.getCodePostal(),
-				utilisateur.getMdpHashe());
-	}
 
-	public UtilisateurDto() {
-	}
+    public static UtilisateurDto from(Utilisateur utilisateur) {
+        return new UtilisateurDto(utilisateur.getNom(),utilisateur.getPrenom(),utilisateur.getEmail(),utilisateur.getPseudo(),utilisateur.getRegion(), utilisateur.getCommune(), utilisateur.getCodePostal(), utilisateur.getMdpHashe(), utilisateur.getRole());
+    }
 
-	public UtilisateurDto(String nom, String prenom, String email, String pseudo, String region, Commune commune,
-			String codePostal, String mdpHashe) {
-		this.nom = nom;
-		this.prenom = prenom;
-		this.email = email;
-		this.pseudo = pseudo;
-		this.region = region;
-		this.commune = commune;
-		this.codePostal = codePostal;
-		this.mdpHashe = mdpHashe;
-	}
+    public UtilisateurDto() {
+    }
 
-	public String getNom() {
-		return nom;
-	}
+    public UtilisateurDto(String nom, String prenom, String email, String pseudo, String region, Commune commune, String codePostal, String mdpHashe, RolesEnum role) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.pseudo = pseudo;
+        this.region = region;
+        this.commune = commune;
+        this.codePostal = codePostal;
+        this.mdpHashe = mdpHashe;
+        this.role = role;
+    }
 
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
+    public String getNom() {
+        return nom;
+    }
 
-	public String getPrenom() {
-		return prenom;
-	}
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
 
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
-	}
+    public String getPrenom() {
+        return prenom;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public String getPseudo() {
-		return pseudo;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setPseudo(String pseudo) {
-		this.pseudo = pseudo;
-	}
+    public String getPseudo() {
+        return pseudo;
+    }
 
-	public String getRegion() {
-		return region;
-	}
+    public void setPseudo(String pseudo) {
+        this.pseudo = pseudo;
+    }
 
-	public void setRegion(String region) {
-		this.region = region;
-	}
+    public String getRegion() {
+        return region;
+    }
 
-	public Commune getCommune() {
-		return commune;
-	}
+    public void setRegion(String region) {
+        this.region = region;
+    }
 
-	public void setCommune(Commune commune) {
-		this.commune = commune;
-	}
+    public Commune getCommune() {
+        return commune;
+    }
 
-	public String getCodePostal() {
-		return codePostal;
-	}
+    public void setCommune(Commune commune) {
+        this.commune = commune;
+    }
 
-	public void setCodePostal(String codePostal) {
-		this.codePostal = codePostal;
-	}
+    public String getCodePostal() {
+        return codePostal;
+    }
 
-	public String getMdpHashe() {
-		return mdpHashe;
-	}
+    public void setCodePostal(String codePostal) {
+        this.codePostal = codePostal;
+    }
 
-	public void setMdpHashe(String mdpHashe) {
-		this.mdpHashe = mdpHashe;
-	}  
+    public String getMdpHashe() {
+        return mdpHashe;
+    }
+
+    public void setMdpHashe(String mdpHashe) {
+        this.mdpHashe = mdpHashe;
+    }
+
+    public RolesEnum getRole() {
+        return role;
+    }
+
+    public void setRole(RolesEnum role) {
+        this.role = role;
+    }
+
 }
