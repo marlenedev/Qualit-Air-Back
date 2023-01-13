@@ -5,6 +5,7 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvValidationException;
 import fr.diginamic.qualitair.entites.Commune;
+import fr.diginamic.qualitair.entites.Utilisateur;
 import fr.diginamic.qualitair.repository.CommuneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -17,6 +18,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CommuneService {
@@ -52,4 +54,17 @@ public class CommuneService {
             ex.printStackTrace();
         }
     }
+
+    public Optional<Commune> findById(Integer id) {
+        return communeRepository.findById(id);
+    }
+
+    public List<Commune> findAll(){
+        return this.communeRepository.findAll();
+    }
+
+    public Optional<Commune> findByCommune(String commune) { return communeRepository.findByCommune(commune); }
+
+    public List<Commune> findByCommuneStartsWith(String commune) { return communeRepository.findTop25ByCommuneStartsWith(commune); }
+
 }
