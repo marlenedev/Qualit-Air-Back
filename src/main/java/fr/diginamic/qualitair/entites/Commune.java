@@ -14,7 +14,7 @@ public class Commune {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @JsonIgnore
+
     private String commune;
     
     private Long nbHabitants;
