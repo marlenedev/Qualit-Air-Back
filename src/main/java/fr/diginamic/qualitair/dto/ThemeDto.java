@@ -12,16 +12,25 @@ public class ThemeDto {
 	private String libelle;
 
 	public static ThemeDto from(Theme theme) {
-		return new ThemeDto(theme.getLibelle());
+		return new ThemeDto(theme.getId(), theme.getLibelle());
 	}
 
 	public ThemeDto() {
 		super();
 	}
 
-	public ThemeDto(String libelle) {
+	public ThemeDto(Integer id, String libelle) {
 		super();
+		this.id = id;
 		this.libelle = libelle;
+	}
+	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getLibelle() {
@@ -32,11 +41,5 @@ public class ThemeDto {
 		this.libelle = libelle;
 	}
 
-	public Integer getId() {
-		return id;
-	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
 }

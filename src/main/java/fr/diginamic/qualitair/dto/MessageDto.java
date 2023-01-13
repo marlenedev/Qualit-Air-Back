@@ -11,6 +11,8 @@ import fr.diginamic.qualitair.entites.Message;
 
 public class MessageDto {
 	
+	private Integer id;
+	private Integer discussionId;
 	private String titre;
 	private LocalDateTime date;
 	private String message;
@@ -19,7 +21,7 @@ public class MessageDto {
 	
 	
 	public static MessageDto from (Message message) {
-		return new MessageDto(message.getFilDiscussion().getTitre(), message.getDate(), message.getMessage(), message.getNbReactions(), message.getUtilisateur().getPseudo());
+		return new MessageDto(message.getId(), message.getFilDiscussion().getId(), message.getFilDiscussion().getTitre(), message.getDate(), message.getMessage(), message.getNbReactions(), message.getUtilisateur().getPseudo());
 	}
 	
 	
@@ -29,8 +31,10 @@ public class MessageDto {
 	}
 
 
-	public MessageDto(String titre, LocalDateTime date, String message, Integer nbLike, String pseudo) {
+	public MessageDto(Integer id, Integer discussionId, String titre, LocalDateTime date, String message, Integer nbLike, String pseudo) {
 		super();
+		this.id = id;
+		this.discussionId = discussionId;
 		this.titre = titre;
 		this.date = date;
 		this.message = message;
@@ -38,6 +42,21 @@ public class MessageDto {
 		this.pseudo = pseudo;
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
+	public Integer getDiscussionId() {
+		return discussionId;
+	}
+
+	public void setDiscussionId(Integer discussionId) {
+		this.discussionId = discussionId;
+	}
 
 	public String getTitre() {
 		return titre;

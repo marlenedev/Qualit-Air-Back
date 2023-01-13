@@ -1,15 +1,13 @@
 package fr.diginamic.qualitair.controller;
 
 
+import fr.diginamic.qualitair.dto.ForumUtilisateurDto;
 import fr.diginamic.qualitair.dto.ModificationUserDto;
 import fr.diginamic.qualitair.dto.UtilisateurDto;
-import fr.diginamic.qualitair.entites.FilDiscussion;
-import fr.diginamic.qualitair.entites.Theme;
 import fr.diginamic.qualitair.entites.Utilisateur;
 import fr.diginamic.qualitair.services.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,6 +43,15 @@ public class UtilisateurController {
     @GetMapping()
 	public List<UtilisateurDto> listeUtilisateurs(){
 		return this.utilisateurService.findAll().stream().map(UtilisateurDto::from).collect(Collectors.toList());
+	}
+    
+    /**
+     * Récupère la liste des utilisateurs pour le forum
+     * @return
+     */
+    @GetMapping("/forum")
+	public List<ForumUtilisateurDto> listeForumUtilisateurs(){
+		return this.utilisateurService.findForumUtilisateurs().stream().map(ForumUtilisateurDto::from).collect(Collectors.toList());
 	}
 
     /**
