@@ -3,6 +3,8 @@ package fr.diginamic.qualitair.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,6 +43,16 @@ public class FilDiscussionController {
 	@GetMapping("discussions")
 	public List<FilDiscussionDto> listAll() {
 		return this.discussionService.findAll().stream().map(FilDiscussionDto::from).toList();
+	}
+	
+	@GetMapping("discussions/{id}")
+	public FilDiscussionDto findDiscussionsById(@PathVariable(name = "id") Integer id) {
+		Optional<FilDiscussionDto> optDiscussion = this.discussionService.findById(id).map(FilDiscussionDto::from);
+		
+		if(optDiscussion.isEmpty()) {
+			throw new EntityNotFoundException();
+		}
+		return optDiscussion.get();
 	}
 
 	/**
