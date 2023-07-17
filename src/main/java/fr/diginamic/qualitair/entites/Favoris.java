@@ -18,14 +18,15 @@ public class Favoris {
     @JoinColumn(name = "id_utilisateur")
     private Utilisateur utilisateur;
 
-    private String libelle;
+    @Column(name = "code_postal")
+    private String codePostal;
 
     public Favoris() {
     }
 
-    public Favoris(Integer id, String libelle) {
+    public Favoris(Integer id, String codePostal) {
         this.id = id;
-        this.libelle = libelle;
+        this.codePostal = codePostal;
     }
 
     public Integer getId() {
@@ -36,11 +37,27 @@ public class Favoris {
         this.id = id;
     }
 
-    public String getLibelle() {
-        return libelle;
+    public Commune getCommune() {
+        return commune;
     }
 
-    public void setLibelle(String libelle) {
-        this.libelle = libelle;
+    public void setCommune(Commune commune) {
+        this.commune = commune;
+    }
+
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
+    }
+
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
+    }
+
+    public String getCodePostal() {
+        return codePostal;
+    }
+
+    public void setCodePostal(String codePostal) {
+        this.codePostal = codePostal;
     }
 }
