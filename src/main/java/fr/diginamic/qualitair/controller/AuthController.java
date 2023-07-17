@@ -1,7 +1,10 @@
 package fr.diginamic.qualitair.controller;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import fr.diginamic.qualitair.dto.UtilisateurDto;
+import fr.diginamic.qualitair.entites.Utilisateur;
 import fr.diginamic.qualitair.jwt.JWTTokenProvider;
+import fr.diginamic.qualitair.repository.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -27,32 +30,34 @@ public class AuthController {
     @Autowired
     private AuthenticationManagerBuilder authenticationManagerBuilder;
 
+    @Autowired
+    private UtilisateurRepository utilisateurRepository;
     @PostMapping
     public JWTToken authorize(
-            @RequestParam("login") String login,
-            @RequestParam("mdp") String mdp) {
+            @RequestBody Utilisateur user)  {
 
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                login, mdp
+                user.getPseudo(), user.getMdpHashe()
         );
-        String jwt = "";
+       Utilisateur utilisateurconnect = utilisateurRepository.findByPseudo(user.getPseudo());
+        String jwt ="";
         try {
             Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
             SecurityContextHolder.getContext().setAuthentication(authentication);
             // Creation du token avec login et droit
-            var roles = userDetailsService.loadUserByUsername(login)
+            var roles = userDetailsService.loadUserByUsername(user.getPseudo())
                     .getAuthorities()
                     .stream()
                     .map(GrantedAuthority::getAuthority)
                     .collect(Collectors.toList());
 
-            jwt = jwtTokenProvider.createToken(authentication.getName(), roles);
+           jwt = jwtTokenProvider.createToken(authentication.getName(), roles);
 
         }catch(BadCredentialsException e){
             e.printStackTrace();
         }
 
-        return new JWTToken(jwt);
+        return new JWTToken(jwt, utilisateurconnect);
     }
 
     /**
@@ -61,9 +66,19 @@ public class AuthController {
     static class JWTToken {
 
         private String idToken;
+        private Utilisateur user;
 
-        JWTToken(String idToken) {
+        public Utilisateur getUser() {
+            return user;
+        }
+
+        public void setUser(Utilisateur user) {
+            this.user = user;
+        }
+
+        JWTToken(String idToken, Utilisateur user) {
             this.idToken = idToken;
+            this.user = user;
         }
 
         @JsonProperty("id_token")
