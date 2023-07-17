@@ -29,6 +29,8 @@ public class AuthController {
 
     @Autowired
     private AuthenticationManagerBuilder authenticationManagerBuilder;
+
+    @Autowired
     private UtilisateurRepository utilisateurRepository;
     @PostMapping
     public JWTToken authorize(
