@@ -31,6 +31,7 @@ public class Utilisateur {
 
     private String status;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "utilisateur")
     private Set<Favoris> favoris;
 
