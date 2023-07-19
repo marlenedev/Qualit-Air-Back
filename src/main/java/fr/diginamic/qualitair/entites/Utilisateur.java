@@ -34,12 +34,11 @@ public class Utilisateur {
     @OneToMany(mappedBy = "utilisateur")
     private Set<Favoris> favoris;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_commune")
     private Commune commune;
 
-    @JsonIgnore
+
     @OneToMany(mappedBy = "utilisateur")
     private Set<FilDiscussion> filDiscussion;
 

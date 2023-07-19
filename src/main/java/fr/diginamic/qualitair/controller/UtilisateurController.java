@@ -89,7 +89,7 @@ public class UtilisateurController {
         }
     }
 
-    @PatchMapping("/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> updateInformationsUser(@RequestBody ModificationUserDto modificationUserDto, @PathVariable Integer id){
         return ResponseEntity.ok(this.utilisateurService.modifierUtilisateur(modificationUserDto, id));
     }
