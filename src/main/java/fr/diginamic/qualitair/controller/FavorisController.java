@@ -21,12 +21,24 @@ import java.util.stream.Collectors;
 public class FavorisController {
 
     @Autowired
-    FavorisService favorisService;
+    private FavorisService favorisService;
 
     @Autowired
-    UtilisateurService utilisateurService;
+    private UtilisateurService utilisateurService;
+
 
     @GetMapping("/{id}")
+    public ResponseEntity<?> getOneFavori(@RequestBody @PathVariable("id") Integer id){
+
+        Optional<Favoris> favoriTrouve = this.favorisService.findById(id);
+
+        if (favoriTrouve.isPresent()) {
+            return ResponseEntity.ok(favorisService.findById(id));
+        } else {
+            return ResponseEntity.status(400).body("Le favori n'a pas été trouvé");
+        }
+    }
+    @GetMapping("/list/{id}")
     public List<FavorisDto> listeFavorisByUser(@PathVariable Integer id){
         return this.favorisService.getFavorisByUserId(id).stream().map(FavorisDto::from).collect(Collectors.toList());
     }
@@ -37,12 +49,12 @@ public class FavorisController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> supprimerUtilisateur(@PathVariable(value = "id") Integer id) throws NotFoundException {
+    public ResponseEntity<String> supprimerFavori(@PathVariable(value = "id") Integer id) throws NotFoundException {
         Optional<Favoris> suppressionFavoris = this.favorisService.findById(id);
         if (suppressionFavoris.isPresent()) {
             Favoris favorisSupprime = suppressionFavoris.get();
             this.favorisService.delete(favorisSupprime);
-            return ResponseEntity.status(200).body("Le favori numéro " + id + " a été supprimé");
+            return ResponseEntity.status(200).body("Le favoris avec le numéro " + id + " a été supprimé");
         } else {
             throw new NotFoundException();
         }
