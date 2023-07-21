@@ -1,5 +1,6 @@
 package fr.diginamic.qualitair.entites;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 
@@ -31,6 +32,7 @@ public class Utilisateur {
 
     private String status;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "utilisateur")
     private Set<Favoris> favoris;
 
