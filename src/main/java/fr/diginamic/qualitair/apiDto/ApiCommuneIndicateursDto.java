@@ -14,6 +14,7 @@ public class ApiCommuneIndicateursDto {
 		this.meteo = meteo;
 		this.pollution = pollution;
 	}
+
 	public ApiCommuneDto getCommune() {
 		return commune;
 	}
@@ -32,6 +33,5 @@ public class ApiCommuneIndicateursDto {
 	public void setPollution(ApiPollutionDto pollution) {
 		this.pollution = pollution;
 	}
-	
-	
+
 }
