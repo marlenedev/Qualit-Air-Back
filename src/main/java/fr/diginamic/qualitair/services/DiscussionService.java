@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import fr.diginamic.qualitair.repository.ThemeRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,12 +20,15 @@ public class DiscussionService {
 
 	private DiscussionRepository discussionRepository;
 	private UtilisateurRepository utilisateurRepository;
+
+	private ThemeRepository themeRepository;
 	private ThemeService themeService;
 
-	public DiscussionService(DiscussionRepository discussionRepository, UtilisateurRepository utilisateurRepository, ThemeService themeService) {
+	public DiscussionService(DiscussionRepository discussionRepository, UtilisateurRepository utilisateurRepository, ThemeService themeService, ThemeRepository themeRepository) {
 		super();
 		this.discussionRepository = discussionRepository;
 		this.utilisateurRepository = utilisateurRepository;
+		this.themeRepository = themeRepository;
 		this.themeService = themeService;
 	}
 
@@ -65,4 +69,12 @@ public class DiscussionService {
 		return filDiscussion;
 	}
 
+	public List<FilDiscussion> findAllByTheme(Integer idTheme) throws Exception {
+		Optional<Theme> optionalTheme = themeRepository.findById(idTheme);
+		if(optionalTheme.isPresent()){
+			return discussionRepository.findAllByTheme(optionalTheme.get());
+		}else{
+			throw new Exception("le theme n'existe pas");
+		}
+	}
 }

@@ -87,4 +87,9 @@ public class FilDiscussionController {
 			return ResponseEntity.status(400).body("Le message n'a pas pu être crée");
 		}
 	}
+
+	@GetMapping("fil-discussions/{idTheme}")
+	public List<FilDiscussionDto> findAllByTheme(@PathVariable Integer idTheme) throws Exception {
+		return this.discussionService.findAllByTheme(idTheme).stream().map(FilDiscussionDto::from).toList();
+	}
 }
