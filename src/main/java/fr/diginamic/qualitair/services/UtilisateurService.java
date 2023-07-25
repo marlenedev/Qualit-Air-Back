@@ -10,6 +10,7 @@ import fr.diginamic.qualitair.dto.UtilisateurDto;
 import fr.diginamic.qualitair.entites.Utilisateur;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -97,5 +98,17 @@ public class UtilisateurService {
 
 		return utilisateurRepository.save(utilisateur);
 
+	}
+
+	public Utilisateur suspendreUtilisateur(Integer id, LocalDateTime dateFinSuspension) {
+		Optional<Utilisateur> utilisateurOptional = findById(id);
+		if(utilisateurOptional.isPresent()) {
+			Utilisateur utilisateur = utilisateurOptional.get();
+			utilisateur.setSuspended(true);
+			utilisateur.setDateFinSuspension(dateFinSuspension);
+
+			return utilisateurRepository.save(utilisateur);
+		}
+		return null;
 	}
 }

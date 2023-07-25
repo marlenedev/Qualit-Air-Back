@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -31,6 +32,11 @@ public class Utilisateur {
     private RolesEnum role;
 
     private String status;
+
+    @Column(name = "date_fin_suspension")
+    private LocalDateTime dateFinSuspension;
+
+    private boolean suspended;
 
     @JsonBackReference
     @OneToMany(mappedBy = "utilisateur")
@@ -134,6 +140,22 @@ public class Utilisateur {
 
     public String getEmail() {
         return email;
+    }
+
+    public LocalDateTime getDateFinSuspension() {
+        return dateFinSuspension;
+    }
+
+    public void setDateFinSuspension(LocalDateTime dateFinSuspension) {
+        this.dateFinSuspension = dateFinSuspension;
+    }
+
+    public boolean isSuspended() {
+        return suspended;
+    }
+
+    public void setSuspended(boolean suspended) {
+        this.suspended = suspended;
     }
 
     public void setEmail(String email) {

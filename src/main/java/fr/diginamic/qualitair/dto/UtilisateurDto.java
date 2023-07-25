@@ -2,6 +2,8 @@ package fr.diginamic.qualitair.dto;
 
 import fr.diginamic.qualitair.entites.*;
 
+import java.time.LocalDateTime;
+
 public class UtilisateurDto {
 
     private String nom;
@@ -13,6 +15,8 @@ public class UtilisateurDto {
     private String codePostal;
     private String mdpHashe;
     private RolesEnum role;
+    private LocalDateTime dateFinSuspension;
+    private boolean suspended;
 
 
     public static UtilisateurDto from(Utilisateur utilisateur) {
@@ -60,6 +64,22 @@ public class UtilisateurDto {
 
     public String getPseudo() {
         return pseudo;
+    }
+
+    public LocalDateTime getDateFinSuspension() {
+        return dateFinSuspension;
+    }
+
+    public void setDateFinSuspension(LocalDateTime dateFinSuspension) {
+        this.dateFinSuspension = dateFinSuspension;
+    }
+
+    public boolean isSuspended() {
+        return suspended;
+    }
+
+    public void setSuspended(boolean suspended) {
+        this.suspended = suspended;
     }
 
     public void setPseudo(String pseudo) {

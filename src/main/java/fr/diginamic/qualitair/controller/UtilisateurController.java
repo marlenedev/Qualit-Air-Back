@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -89,8 +90,32 @@ public class UtilisateurController {
         }
     }
 
+    /**
+     * Modifie les informations d'un utilisateur
+     * @param modificationUserDto
+     * @param id
+     * @return
+     */
     @PutMapping("/{id}")
     public ResponseEntity<?> updateInformationsUser(@RequestBody ModificationUserDto modificationUserDto, @PathVariable Integer id){
         return ResponseEntity.ok(this.utilisateurService.modifierUtilisateur(modificationUserDto, id));
+    }
+
+    /**
+     * Suspend le compte d'un utilisateur
+     * @param id
+     * @param utilisateurDto
+     * @return
+     */
+    @PostMapping("/suspendre/{id}")
+    public ResponseEntity<?> suspendreUtilisateur(@PathVariable(value = "id") Integer id, @RequestBody UtilisateurDto utilisateurDto) {
+        LocalDateTime dateFinSuspension = utilisateurDto.getDateFinSuspension();
+        Utilisateur utilisateurSuspendu = utilisateurService.suspendreUtilisateur(id, dateFinSuspension);
+
+        if (utilisateurSuspendu != null) {
+            return ResponseEntity.ok(utilisateurSuspendu);
+        } else {
+            return ResponseEntity.status(400).body("L'utilisateur n'a pas été trouvé");
+        }
     }
 }
