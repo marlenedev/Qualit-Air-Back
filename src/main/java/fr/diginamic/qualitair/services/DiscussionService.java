@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import fr.diginamic.qualitair.dto.FilDiscussionDto;
+import fr.diginamic.qualitair.dto.UtilisateurDto;
 import fr.diginamic.qualitair.repository.ThemeRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,7 +52,7 @@ public class DiscussionService {
 
 	/**
 	 * Ajouter un fil de discussion avec date de création, titre, utilisateur, thème
-	 * @param ajouterDiscussionDto {@link AjouterDiscussionDto}
+	 * @param  {@link AjouterDiscussionDto}
 	 * @return sauvegarde du fil de discussion
 	 */
 	@Transactional
@@ -69,6 +71,9 @@ public class DiscussionService {
 		return filDiscussion;
 	}
 
+	/**
+	 * Récupère les fils de discussion lié à un id theme
+	 * */
 	public List<FilDiscussion> findAllByTheme(Integer idTheme) throws Exception {
 		Optional<Theme> optionalTheme = themeRepository.findById(idTheme);
 		if(optionalTheme.isPresent()){
@@ -77,4 +82,6 @@ public class DiscussionService {
 			throw new Exception("le theme n'existe pas");
 		}
 	}
+
+
 }

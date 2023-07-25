@@ -5,13 +5,9 @@ import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
+import fr.diginamic.qualitair.dto.AjouterDiscussionDto;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import fr.diginamic.qualitair.dto.AjouterMessageDto;
 import fr.diginamic.qualitair.dto.FilDiscussionDto;
@@ -23,6 +19,7 @@ import fr.diginamic.qualitair.services.MessageService;
 
 @RestController
 @CrossOrigin
+@RequestMapping("fil-discussions")
 public class FilDiscussionController {
 
 	private DiscussionService discussionService;
@@ -40,12 +37,12 @@ public class FilDiscussionController {
 	/**
 	 * Récupère les fils de discussion avec date/titre/nbMessage/utilisateur
 	 */
-	@GetMapping("discussions")
+	@GetMapping
 	public List<FilDiscussionDto> listAll() {
 		return this.discussionService.findAll().stream().map(FilDiscussionDto::from).toList();
 	}
 	
-	@GetMapping("discussions/{id}")
+	@GetMapping("/{id}")
 	public FilDiscussionDto findDiscussionsById(@PathVariable(name = "id") Integer id) {
 		Optional<FilDiscussionDto> optDiscussion = this.discussionService.findById(id).map(FilDiscussionDto::from);
 		
@@ -65,7 +62,7 @@ public class FilDiscussionController {
 	 * @return si réussi : nouvel instance de {@link AjouterMessageDto} / sinon
 	 *         erreur 400
 	 */
-	@PostMapping("discussions/{discussionId}/themes/{themeId}/messages")
+	@PostMapping("/{discussionId}/themes/{themeId}/messages")
 	public ResponseEntity<?> ajouterMessageADiscussion(@PathVariable(name = "discussionId") Integer discussionId,
 			@PathVariable(name = "themeId") Integer themeId, @RequestBody AjouterMessageDto ajouterMessageDto) {
 
@@ -88,7 +85,18 @@ public class FilDiscussionController {
 		}
 	}
 
-	@GetMapping("fil-discussions/{idTheme}")
+	/**
+	 * Ajoute une discussion
+	 * */
+	@PostMapping
+	public ResponseEntity<FilDiscussion>addFilDiscussion(@RequestBody AjouterDiscussionDto filDiscussionDto){
+		return ResponseEntity.ok(discussionService.creerDiscussion(filDiscussionDto));
+	}
+
+	/**
+	 * Récupère les fils de discussion lié à un thème
+	 * */
+	@GetMapping("/theme/{idTheme}")
 	public List<FilDiscussionDto> findAllByTheme(@PathVariable Integer idTheme) throws Exception {
 		return this.discussionService.findAllByTheme(idTheme).stream().map(FilDiscussionDto::from).toList();
 	}
