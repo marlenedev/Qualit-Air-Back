@@ -14,6 +14,7 @@ public class WebApiService {
 	@Autowired
 	RestTemplate restTemplate;
 	public final String appid="a3e4caaaf6336ce42f320a0386192460";
+//	public final String appid2="355e2b11d06f6173e04883b948d6af0a";
 	
 	// Api Geocoding 
 	public ApiCommuneDto getInfoCommune (String codePostal) {
