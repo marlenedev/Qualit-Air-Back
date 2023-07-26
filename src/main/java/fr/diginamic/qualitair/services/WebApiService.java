@@ -1,5 +1,6 @@
 package fr.diginamic.qualitair.services;
 
+import fr.diginamic.qualitair.models.HistoriqueMeteo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -30,7 +31,12 @@ public class WebApiService {
 	// Api Air Pollution
 	public ApiPollutionDto getInfoPollutionCommune (Double lat, Double lon) {
 		return restTemplate.getForObject("http://api.openweathermap.org/data/2.5/air_pollution?lat={lat}&lon={lon}&appid={API key}", ApiPollutionDto.class,lat,lon,appid);
+	}
 
+	// Données de l'historique météo pour Nantes stockées sur PlanetHoster
+	public HistoriqueMeteo getHistoriqueMeteo(String start, String end) {
+		HistoriqueMeteo historiqueMeteo = restTemplate.getForObject("https://frugysoft.fr/meteo?start={start}&end={end}", HistoriqueMeteo.class, start, end);
+		return historiqueMeteo;
 	}
 	
 }
