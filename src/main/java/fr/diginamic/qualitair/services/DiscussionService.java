@@ -58,14 +58,14 @@ public class DiscussionService {
 	@Transactional
 	public FilDiscussion creerDiscussion(AjouterDiscussionDto ajouterFilDiscussionDto) {
 		// TODO à remplacer par Spring Security config
-		Optional<Utilisateur> utilisateur = utilisateurRepository.findByEmail(ajouterFilDiscussionDto.getUtilisateur().getEmail());
+		Utilisateur utilisateur = utilisateurRepository.findByPseudo(ajouterFilDiscussionDto.getUtilisateur().getPseudo());
 		//TODO récupérer theme de l'uri pas du corps de la requête
 		Optional<Theme> theme = themeService.findById(ajouterFilDiscussionDto.getTheme().getId());
 		
 		FilDiscussion filDiscussion = new FilDiscussion();
 		filDiscussion.setDateCreation(LocalDateTime.now());
 		filDiscussion.setTitre(ajouterFilDiscussionDto.getTitre());
-		filDiscussion.setUtilisateur(utilisateur.get());
+		filDiscussion.setUtilisateur(utilisateur);
 		filDiscussion.setTheme(theme.get());
 		discussionRepository.save(filDiscussion);
 		return filDiscussion;
