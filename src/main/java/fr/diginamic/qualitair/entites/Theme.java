@@ -18,7 +18,7 @@ public class Theme {
 
     private String libelle;
 
-    @OneToMany(mappedBy = "theme")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "theme")
     private List<FilDiscussion> filDiscussion;
 
     public Theme() {

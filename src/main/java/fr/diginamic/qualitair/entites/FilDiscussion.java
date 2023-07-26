@@ -29,7 +29,7 @@ public class FilDiscussion {
     @JoinColumn(name = "id_theme")
     private Theme theme;
 
-    @OneToMany(mappedBy = "filDiscussion")
+    @OneToMany(cascade = CascadeType.REMOVE,mappedBy = "filDiscussion")
     private Set<Message> messages;
 
     public FilDiscussion() {
