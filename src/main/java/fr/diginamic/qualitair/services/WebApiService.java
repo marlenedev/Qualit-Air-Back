@@ -1,7 +1,9 @@
 package fr.diginamic.qualitair.services;
 
-import fr.diginamic.qualitair.models.HistoriqueMeteo;
+import fr.diginamic.qualitair.entites.Meteo;
+import fr.diginamic.qualitair.repository.MeteoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -9,13 +11,21 @@ import fr.diginamic.qualitair.apiDto.ApiCommuneDto;
 import fr.diginamic.qualitair.apiDto.ApiMeteoReelDto;
 import fr.diginamic.qualitair.apiDto.ApiPollutionDto;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Service
 public class WebApiService {
 	
 	@Autowired
 	RestTemplate restTemplate;
 	public final String appid="a3e4caaaf6336ce42f320a0386192460";
-//	public final String appid2="355e2b11d06f6173e04883b948d6af0a";
+	private final MeteoRepository meteoRepository;
+
+	public WebApiService(MeteoRepository meteoRepository) {
+		this.meteoRepository = meteoRepository;
+	}
 	
 	// Api Geocoding 
 	public ApiCommuneDto getInfoCommune (String codePostal) {
@@ -33,10 +43,43 @@ public class WebApiService {
 		return restTemplate.getForObject("http://api.openweathermap.org/data/2.5/air_pollution?lat={lat}&lon={lon}&appid={API key}", ApiPollutionDto.class,lat,lon,appid);
 	}
 
-	// Données de l'historique météo pour Nantes stockées sur PlanetHoster
-	public HistoriqueMeteo getHistoriqueMeteo(String start, String end) {
-		HistoriqueMeteo historiqueMeteo = restTemplate.getForObject("https://frugysoft.fr/meteo?start={start}&end={end}", HistoriqueMeteo.class, start, end);
-		return historiqueMeteo;
+
+	/**
+	 * Permet de sauvegarder la météo en base de données
+	 * @param meteo
+	 */
+	public void sauvegardeMeteo(Meteo meteo) {
+		meteo.setDate(LocalDate.now());
+		meteoRepository.save(meteo);
+	}
+
+	/**
+	 * Planification de la sauvegarde pour la météo toutes les 24h avec l'annotation @Scheduled
+	 */
+	@Scheduled(fixedRate = 86400000)
+	public void planificationSauvegardeMeteo() {
+		String codePostal = "44000";
+		ApiCommuneDto communeDto = getInfoCommune(codePostal);
+		ApiMeteoReelDto meteoReelDto = getInfoMeteoCommune(communeDto.getLat(), communeDto.getLon());
+
+		Meteo meteo = new Meteo();
+		meteo.setCodePostal(communeDto.getName());
+		meteo.setTemp(meteoReelDto.getMain().getTemp());
+		meteo.setHumidity(meteoReelDto.getMain().getHumidity());
+		meteo.setPressure(meteoReelDto.getMain().getPressure());
+
+		sauvegardeMeteo(meteo);
+	}
+
+	/**
+	 * Récupère l'historique de météo entre deux dates à partir de la base de données
+	 *
+	 * @param start la date de début de la période de recherche
+	 * @param end   la date de fin de la période de recherche
+	 * @return la liste des enregistrements de météo entre les deux dates spécifiées
+	 */
+	public List<Meteo> getHistoriqueMeteo(LocalDate start, LocalDate end) {
+		return meteoRepository.findByDateBetween(start, end);
 	}
 	
 }
