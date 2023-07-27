@@ -7,18 +7,21 @@ public class AjouterMessageDto {
 	private String message;
 	private Integer discussionId;
 
+	private UtilisateurDto utilisateur;
+
 	public static AjouterMessageDto from(Message message) {
-		return new AjouterMessageDto(message.getMessage(), message.getFilDiscussion().getId());
+		return new AjouterMessageDto(message.getMessage(), message.getFilDiscussion().getId(),UtilisateurDto.from(message.getUtilisateur()));
 	}
 
 	public AjouterMessageDto() {
 		super();
 	}
 
-	public AjouterMessageDto(String message, Integer discussionId) {
+	public AjouterMessageDto(String message, Integer discussionId, UtilisateurDto utilisateur) {
 		super();
 		this.message = message;
 		this.discussionId = discussionId;
+		this.utilisateur = utilisateur;
 	}
 
 	public String getMessage() {
@@ -35,6 +38,14 @@ public class AjouterMessageDto {
 
 	public void setDiscussionId(Integer discussionId) {
 		this.discussionId = discussionId;
+	}
+
+	public UtilisateurDto getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(UtilisateurDto utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 
 }

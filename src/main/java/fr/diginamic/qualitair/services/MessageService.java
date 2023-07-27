@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import fr.diginamic.qualitair.entites.Utilisateur;
+import fr.diginamic.qualitair.repository.UtilisateurRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,10 +21,14 @@ public class MessageService {
 
 	private MessageRepository messageRepository;
 	private DiscussionRepository discussionRepository;
-	public MessageService(MessageRepository messageRepository, DiscussionRepository discussionRepository, ThemeRepository themeRepository) {
+
+	private UtilisateurRepository utilisateurRepository;
+
+	public MessageService(MessageRepository messageRepository, DiscussionRepository discussionRepository,UtilisateurRepository utilisateurRepository) {
 		super();
 		this.messageRepository = messageRepository;
 		this.discussionRepository = discussionRepository;
+		this.utilisateurRepository = utilisateurRepository;
 	}
 
 	/**
@@ -40,16 +46,32 @@ public class MessageService {
 	 */
 	@Transactional
 	public Message creerMessage(AjouterMessageDto ajouterMessageDto) {
+
+		Utilisateur utilisateur = utilisateurRepository.findByPseudo(ajouterMessageDto.getUtilisateur().getPseudo());
+
 		Optional<FilDiscussion> optDiscussion = discussionRepository.findById(ajouterMessageDto.getDiscussionId());
 		
 		Message message = new Message();
 		message.setDate(LocalDateTime.now());
 		message.setMessage(ajouterMessageDto.getMessage());
 		message.setNbReactions(0);
+		message.setUtilisateur(utilisateur);
 		message.setNbVues(0);
 		message.setFilDiscussion(optDiscussion.get());
 		messageRepository.save(message);
 		return message;
+	}
+
+	/**
+	 * Récupère tout les messages liés à un fil de discussion
+	 * */
+	public List<Message> findAllByFilDiscussion(Integer idFilDiscussion) throws Exception{
+		Optional <FilDiscussion> optionalFilDiscussion = discussionRepository.findById(idFilDiscussion);
+		if(optionalFilDiscussion.isPresent()){
+			return messageRepository.findAllByFilDiscussion(optionalFilDiscussion.get());
+		}else{
+			throw new Exception("le fil de discussion n'existe pas");
+		}
 	}
 
 }
