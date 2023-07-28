@@ -27,25 +27,42 @@ public class WebApiService {
 		this.meteoRepository = meteoRepository;
 	}
 	
-	// Api Geocoding 
+	// Api Geocoding
+	/**
+	 * Récupère les données de  la commune en fonction de son code postal depuis l'API OpenWeather
+	 * @param codePostal
+	 * @return url, ApiCommuneDto, codePostal, appid
+	 */
 	public ApiCommuneDto getInfoCommune (String codePostal) {
 		return restTemplate.getForObject("http://api.openweathermap.org/geo/1.0/zip?zip={zip code},{country code}&appid={API key}", ApiCommuneDto.class,codePostal,"FR",appid);
 	}
 
 	// Api Current Weather Data
+	/**
+	 * Récupère les données de  la météo actuelle en fonction de la latitude et la longitude depuis l'API OpenWeather
+	 * @param lat
+	 * @param lon
+	 * @return url, ApiMeteReelDto, lat, lon, appid, metric
+	 */
 	public ApiMeteoReelDto getInfoMeteoCommune (Double lat, Double lon) {
 		return restTemplate.getForObject("http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}&units={units}&lang={lang}", ApiMeteoReelDto.class,lat,lon,appid,"metric","FR");
 
 	}
 	
 	// Api Air Pollution
+	/**
+	 * Récupère les données de pollution en fonction de la latitude et la longitude depuis l'API OpenWeather
+	 * @param lat
+	 * @param lon
+	 * @return url, ApiPollutionDto, lat, lon, appid
+	 */
 	public ApiPollutionDto getInfoPollutionCommune (Double lat, Double lon) {
 		return restTemplate.getForObject("http://api.openweathermap.org/data/2.5/air_pollution?lat={lat}&lon={lon}&appid={API key}", ApiPollutionDto.class,lat,lon,appid);
 	}
 
 
 	/**
-	 * Permet de sauvegarder la météo en base de données
+	 * Permet de sauvegarder la météo en base de données à la date actuelle.
 	 * @param meteo
 	 */
 	public void sauvegardeMeteo(Meteo meteo) {
@@ -55,6 +72,7 @@ public class WebApiService {
 
 	/**
 	 * Planification de la sauvegarde pour la météo toutes les 24h avec l'annotation @Scheduled
+	 * La sauvegarde météo s'effectue seulement pour la ville de Nantes.
 	 */
 	@Scheduled(fixedRate = 86400000)
 	public void planificationSauvegardeMeteo() {
