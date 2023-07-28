@@ -19,7 +19,7 @@ public class FilDiscussion {
     
     private String titre;
 
-    @JsonIgnore
+    @JsonIgnore // Ignorer cette association lors de la sérialisation/désérialisation JSON pour éviter les boucles infinies
     @ManyToOne
     @JoinColumn(name = "id_utilisateur")
     private Utilisateur utilisateur;
@@ -35,12 +35,6 @@ public class FilDiscussion {
     public FilDiscussion() {
     }
 
-   
-
- 
-
-
-
 	public FilDiscussion(Integer id, LocalDateTime dateCreation, String titre, Utilisateur utilisateur, Theme theme,
 			Set<Message> messages) {
 		super();
@@ -51,12 +45,6 @@ public class FilDiscussion {
 		this.theme = theme;
 		this.messages = messages;
 	}
-
-
-
-
-
-
 
 	public Integer getId() {
         return id;

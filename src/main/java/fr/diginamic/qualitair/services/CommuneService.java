@@ -29,6 +29,10 @@ public class CommuneService {
     @Autowired
     CommuneRepository communeRepository;
 
+    /**
+     * Permet de rentrer toutes les communes en base de données en passant par le fichier "donnees_communes.csv"
+     * présent dans le répertoire resources.
+     */
     public void csvReader(){
         Resource resource = resourceLoader.getResource("classpath:/donnees_communes.csv");
         try (Reader reader = Files.newBufferedReader(Paths.get(resource.getURI()));
@@ -55,16 +59,29 @@ public class CommuneService {
         }
     }
 
+    /**
+     * Méthode findById récupéré depuis le repository CommuneRepository
+     * @param id
+     * @return une commune par son id
+     */
     public Optional<Commune> findById(Integer id) {
         return communeRepository.findById(id);
     }
 
+    /**
+     * Méthode findAll récupéré depuis le repository CommuneRepository
+     * @return une liste des communes présentes en base de donénes {@link CommuneRepository}
+     */
     public List<Commune> findAll(){
         return this.communeRepository.findAll();
     }
 
-    public Optional<Commune> findByCommune(String commune) { return communeRepository.findByCommune(commune); }
-
+    /**
+     * Recherche les 25 premiers résultats de communes dont le nom commence par la chaîne renseignée.
+     * en base de données.
+     * @param commune Chaîne de caractères à rechercher
+     * @return Les 25 premières occurrences dont le nom de commune commence par la chaîne renseignée. {@link CommuneRepository}
+     */
     public List<Commune> findByCommuneStartsWith(String commune) { return communeRepository.findTop25ByCommuneStartsWith(commune); }
 
 }

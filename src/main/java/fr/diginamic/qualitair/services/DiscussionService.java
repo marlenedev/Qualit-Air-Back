@@ -35,7 +35,8 @@ public class DiscussionService {
 	}
 
 	/**
-	 * Récupère tous les fils de discussion
+	 * Récupère toutes les discussions de fils de discussion
+	 * @return Une liste contenant toutes les discussions de fils de discussion disponibles.
 	 */
 	public List<FilDiscussion> findAll() {
 		return this.discussionRepository.findAll();
@@ -72,8 +73,12 @@ public class DiscussionService {
 	}
 
 	/**
-	 * Récupère les fils de discussion lié à un id theme
-	 * */
+	 * Récupère toutes les discussions de fils de discussion associées à un thème donné.
+	 *
+	 * @param idTheme L'identifiant du thème pour lequel récupérer les discussions.
+	 * @return Une liste contenant toutes les discussions de fils de discussion associées au thème donné.
+	 * @throws Exception Si le thème avec l'identifiant spécifié n'existe pas.
+	 */
 	public List<FilDiscussion> findAllByTheme(Integer idTheme) throws Exception {
 		Optional<Theme> optionalTheme = themeRepository.findById(idTheme);
 		if(optionalTheme.isPresent()){

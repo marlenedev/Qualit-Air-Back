@@ -26,6 +26,13 @@ public class UtilisateurService {
 		this.utilisateurRepository = utilisateurRepository;
 	}
 
+
+	/**
+	 * Recherche un utilisateur par son adresse e-mail.
+	 *
+	 * @param email L'adresse e-mail de l'utilisateur à rechercher.
+	 * @return L'utilisateur associé à l'adresse e-mail spécifiée, s'il existe dans un {@link Optional}
+	 */
 	public Optional<Utilisateur> findByEmail(String email) {
 		return utilisateurRepository.findByEmail(email);
 	}
@@ -35,7 +42,10 @@ public class UtilisateurService {
 	}
 
 	/**
-	 * Méthode qui créé un nouvel utilisateur si sont email n'est pas trouvé en base
+	 * Enregistre un nouvel utilisateur avec les informations fournies dans l'objet UtilisateurDto.
+	 *
+	 * @param utilisateurDto L'objet UtilisateurDto contenant les informations de l'utilisateur à enregistrer. {@link UtilisateurDto}
+	 * @return L'utilisateur enregistré.
 	 */
 	public Utilisateur enregistrementUtilisateur(UtilisateurDto utilisateurDto) {
 
@@ -67,19 +77,11 @@ public class UtilisateurService {
 	}
 
 	/**
-	 * Récupère les utilisateurs avec les données pour le forum
-	 * @return
-	 */
-	public List<Utilisateur> findForumUtilisateurs() {
-		return this.utilisateurRepository.findAll();
-	}
-
-	/**
-	 * Modifie les informations d'un utilisateur
-	 * 
-	 * @param modificationUserDto
-	 * @param id
-	 * @return
+	 * Modifie les informations d'un utilisateur existant identifié par son identifiant.
+	 *
+	 * @param modificationUserDto L'objet ModificationUserDto contenant les nouvelles informations de l'utilisateur. {@link ModificationUserDto}
+	 * @param id L'identifiant de l'utilisateur à modifier.
+	 * @return L'utilisateur modifié.
 	 */
 	public Utilisateur modifierUtilisateur(ModificationUserDto modificationUserDto, Integer id) {
 

@@ -41,8 +41,8 @@ public class MessageService {
 	/**
 	 * Ajouter un message avec texte du message, fil de discussion
 	 * 
-	 * @param ajouterMessageDto
-	 * @return sauvegarde du message
+	 * @param ajouterMessageDto {@link AjouterMessageDto}
+	 * @return Le nouveau message
 	 */
 	@Transactional
 	public Message creerMessage(AjouterMessageDto ajouterMessageDto) {
@@ -63,8 +63,12 @@ public class MessageService {
 	}
 
 	/**
-	 * Récupère tout les messages liés à un fil de discussion
-	 * */
+	 * Récupère tous les messages associés à un fil de discussion spécifié par son identifiant.
+	 *
+	 * @param idFilDiscussion L'identifiant du fil de discussion pour lequel récupérer les messages.
+	 * @return Une liste contenant tous les messages associés au fil de discussion spécifié.
+	 * @throws Exception Si le fil de discussion avec l'identifiant spécifié n'existe pas.
+	 */
 	public List<Message> findAllByFilDiscussion(Integer idFilDiscussion) throws Exception{
 		Optional <FilDiscussion> optionalFilDiscussion = discussionRepository.findById(idFilDiscussion);
 		if(optionalFilDiscussion.isPresent()){

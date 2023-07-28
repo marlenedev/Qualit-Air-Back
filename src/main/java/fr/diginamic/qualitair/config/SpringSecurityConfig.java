@@ -65,13 +65,21 @@ public class SpringSecurityConfig {
         return http.build();
     }
 
+    /**
+     * Crée et retourne un bean PasswordEncoder pour le cryptage des mots de passe.
+     *
+     * @return Un bean PasswordEncoder basé sur BCryptPasswordEncoder.
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
-        // si on veut totalement outrepasser l'encodage :
-        // return NoOpPasswordEncoder.getInstance();
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Crée et retourne une instance de {@link JWTConfigurer} configurée avec le {@link JWTTokenProvider} spécifié.
+     *
+     * @return Une instance de {@link JWTConfigurer} configurée avec le {@link JWTTokenProvider} spécifié.
+     */
     private JWTConfigurer securityConfigurerAdapter() {
         return new JWTConfigurer(jwtTokenProvider);
     }

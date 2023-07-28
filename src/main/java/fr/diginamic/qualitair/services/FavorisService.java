@@ -29,6 +29,12 @@ public class FavorisService {
         return favorisRepository.findById(id);
     }
 
+    /**
+     * Récupère la liste des favoris associés à un utilisateur spécifié par son identifiant.
+     *
+     * @param id L'id de l'utilisateur pour lequel récupérer les favoris.
+     * @return Une liste contenant tous les favoris associés à l'utilisateur renseigné.
+     */
     public List<Favoris> getFavorisByUserId(Integer id) {
 
         Optional<Utilisateur> utilisateurOptional = utilisateurRepository.findById(id);
@@ -37,6 +43,14 @@ public class FavorisService {
         return favorisList;
     }
 
+    /**
+     * Ajoute un nouveau favori pour l'utilisateur spécifié par son identifiant.
+     *
+     * @param idUtilisateur L'identifiant de l'utilisateur pour lequel ajouter le favori.
+     * @param favorisDto    L'objet FavorisDto contenant les informations du favori à ajouter.
+     * @return Le favori nouvellement ajouté.
+     * @throws NotFoundException Si l'utilisateur avec l'identifiant spécifié n'existe pas.
+     */
     public Favoris ajoutFavoris(Integer idUtilisateur, FavorisDto favorisDto) throws NotFoundException {
 
         Optional<Utilisateur> utilisateurOptional = utilisateurRepository.findById(idUtilisateur);
@@ -54,6 +68,11 @@ public class FavorisService {
         }
     }
 
+    /**
+     * Supprime le favori spécifié.
+     *
+     * @param favoris Le favori à supprimer.
+     */
     public void delete(Favoris favoris) {
         this.favorisRepository.delete(favoris);
     }

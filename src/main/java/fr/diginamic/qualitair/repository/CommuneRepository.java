@@ -12,7 +12,5 @@ import java.util.Optional;
 @Repository
 public interface CommuneRepository extends JpaRepository<Commune, Integer> {
 
-    Optional<Commune> findByCommune(String commune);
-
     List<Commune> findTop25ByCommuneStartsWith(String commune);
 }

@@ -24,7 +24,12 @@ public class ApiCommuneController {
 		this.webApiService = webApiService;
 	}
 
-	// Récupère les infos météo d'une commune suivant son code postal 
+	/**
+	 * Récupère les indicateurs de la commune en utilisant le code postal.
+	 *
+	 * @param codePostal Le code postal de la commune pour laquelle récupérer les indicateurs.
+	 * @return Un objet ApiCommuneIndicateursDto contenant les indicateurs de la commune. {@link ApiCommuneIndicateursDto}
+	 */
 	@GetMapping("indicateurs")
 	public ApiCommuneIndicateursDto getInfoCommune (@RequestParam(value="codePostal") String codePostal) {
 		var commune = webApiService.getInfoCommune(codePostal);

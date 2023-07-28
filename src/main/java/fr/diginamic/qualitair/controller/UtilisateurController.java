@@ -40,7 +40,7 @@ public class UtilisateurController {
 
     /**
      * Récupère la liste de tous les utilisateurs en base
-     * @return
+     * @return La liste de tous les utilisateurs présents en base de données
      */
     @GetMapping()
 	public List<UtilisateurDto> listeUtilisateurs(){
@@ -65,9 +65,9 @@ public class UtilisateurController {
     }
 
     /**
-     * Supprime un utilisateur selon son id
+     * Supprime un utilisateur selon son identifiant
      * @param id
-     * @return
+     * @return Une response body.
      */
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> supprimerUtilisateur(@PathVariable(value = "id") Integer id) {

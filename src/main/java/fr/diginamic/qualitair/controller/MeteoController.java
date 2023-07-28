@@ -28,7 +28,7 @@ public class MeteoController {
     }
 
     /**
-     * Récupère l'historique de météo entre deux dates
+     * Récupère l'historique météo entre deux dates spécifiées.
      *
      * @param start la date de début de la période de recherche (au format "dd/MM/yyyy")
      * @param end   la date de fin de la période de recherche (au format "dd/MM/yyyy")
@@ -43,6 +43,14 @@ public class MeteoController {
         return webApiService.getHistoriqueMeteo(startDate, endDate);
     }
 
+    /**
+     * Exporte les données météo au format CSV pour la période donnée.
+     *
+     * @param start La date de début de la période au format "dd/MM/yyyy".
+     * @param end La date de fin de la période au format "dd/MM/yyyy".
+     * @param response L'objet HttpServletResponse pour écrire la réponse.
+     * @throws IOException Si une erreur survient lors de l'écriture de la réponse.
+     */
     @GetMapping("/export-csv")
     public void exportCSV(@RequestParam("start") @DateTimeFormat(pattern = "dd/MM/yyyy") String start,
                           @RequestParam("end") @DateTimeFormat(pattern = "dd/MM/yyyy") String end,
