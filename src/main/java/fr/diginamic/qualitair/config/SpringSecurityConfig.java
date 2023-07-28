@@ -53,7 +53,8 @@ public class SpringSecurityConfig {
                                 .antMatchers(HttpMethod.POST,"/utilisateurs").permitAll()
                                 .antMatchers("/utilisateurs/delete/**").hasAuthority("ADMIN")
 
-
+                        //historique
+                                .antMatchers("api/meteo/**").permitAll()
 //                                .antMatchers("/**").permitAll()
 
                         // on pourrait par ex. demander une authentification pour toutes les autres requêtes :
