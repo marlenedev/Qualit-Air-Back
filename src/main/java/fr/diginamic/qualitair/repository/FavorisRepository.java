@@ -12,7 +12,5 @@ public interface FavorisRepository extends JpaRepository<Favoris, Integer> {
 
     List<Favoris> findAllByUtilisateurId(Integer id);
 
-    Optional<Favoris> findByCodePostal(String codePostal);
-
 
 }

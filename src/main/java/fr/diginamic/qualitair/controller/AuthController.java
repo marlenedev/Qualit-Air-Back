@@ -32,6 +32,13 @@ public class AuthController {
 
     @Autowired
     private UtilisateurRepository utilisateurRepository;
+
+    /**
+     * Autorise l'utilisateur en générant un jeton JWT après l'authentification.
+     *
+     * @param user L'objet Utilisateur contenant les informations d'identification de l'utilisateur. {@link Utilisateur}
+     * @return Un objet JWTToken contenant le jeton JWT et les informations de l'utilisateur connecté. {@link JWTToken}
+     */
     @PostMapping
     public JWTToken authorize(
             @RequestBody Utilisateur user)  {
