@@ -79,22 +79,5 @@ public class ThemeController {
 		}
 	}
 
-	/**
-	 * S015 POST/themes/{id}/discussions 
-	 * Ajouter un fil de discussion
-	 * @param id
-	 * @param ajouterFilDiscussionDto
-	 * @return si réussi : nouveau instance de {@link AjouterDiscussionDto} / sinon erreur 400
-	 */
-	@PostMapping("/{id}/discussions")
-	public ResponseEntity<?> ajouterDiscussionATheme(@PathVariable(name = "id") Integer id,
-			@RequestBody AjouterDiscussionDto ajouterFilDiscussionDto) {
-		try {
-			FilDiscussion nouveauFil = discussionService.creerDiscussion(ajouterFilDiscussionDto);
-			return ResponseEntity.status(200).body(nouveauFil);
-		} catch (CreerDiscussionException e) {
-			return ResponseEntity.status(400).body("La discussion n'a pas pu être créée");
-		}
-	}
 
 }

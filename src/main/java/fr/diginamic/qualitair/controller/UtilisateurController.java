@@ -46,15 +46,7 @@ public class UtilisateurController {
 	public List<UtilisateurDto> listeUtilisateurs(){
 		return this.utilisateurService.findAll().stream().map(UtilisateurDto::from).collect(Collectors.toList());
 	}
-    
-    /**
-     * Récupère la liste des utilisateurs pour le forum
-     * @return
-     */
-    @GetMapping("/forum")
-	public List<ForumUtilisateurDto> listeForumUtilisateurs(){
-		return this.utilisateurService.findForumUtilisateurs().stream().map(ForumUtilisateurDto::from).collect(Collectors.toList());
-	}
+
 
     /**
      * Récupère un utilisateur selon son id
@@ -89,6 +81,9 @@ public class UtilisateurController {
         }
     }
 
+    /**
+     * Modifie les information d'un utilisateur
+     * */
     @PutMapping("/{id}")
     public ResponseEntity<?> updateInformationsUser(@RequestBody ModificationUserDto modificationUserDto, @PathVariable Integer id){
         return ResponseEntity.ok(this.utilisateurService.modifierUtilisateur(modificationUserDto, id));
