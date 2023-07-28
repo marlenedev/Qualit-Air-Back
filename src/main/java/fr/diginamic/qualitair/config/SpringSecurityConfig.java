@@ -5,6 +5,7 @@ import fr.diginamic.qualitair.jwt.JWTTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -29,20 +30,32 @@ public class SpringSecurityConfig {
                 .cors().and()
                 .csrf().disable() // obligé de désactiver la protection csrf pour tester en local avec postman.
                 .authorizeRequests((authorize) -> authorize
-                                // si l'url pointe vers /rest/admin ou /rest/user, on demande le role "ADMIN" à l'utilisateur.
-//                                .antMatchers("/rest/user/**").hasAuthority("ADMIN")
-//                                .antMatchers("/connexion/**").permitAll()
-//                                .antMatchers("/utilisateurs").permitAll()
-//                                .antMatchers("/utilisateurs/delete/**").hasAuthority("ADMIN")
-//                                .antMatchers("/discussions").hasAnyAuthority("ADMIN", "USER")
-                                .antMatchers("/**").permitAll()
 
-                                // pour /rest/hero on demande "ADMIN" ou "USER"
-//                                .antMatchers("/rest/hero/**").hasAnyAuthority("ADMIN", "USER")
-//                                .antMatchers("/utilisateurs").permitAll()
+                       //Connexion
+                                .antMatchers("/connexion/**").permitAll()
+                        //Forum
+                            //theme
+                                .antMatchers("/themes").permitAll()
+                                .antMatchers(HttpMethod.DELETE,"/themes/{id}").hasRole("ADMIN")
+                            //Fil de discussion
+                                .antMatchers("/fil-discussions/**").permitAll()
+                            //Message
+                                .antMatchers("/messages/**").permitAll()
+                        //Indicateur
+                            //api
+                                .antMatchers("/api/**").permitAll()
+                            //favoris
+                                .antMatchers("api/favoris/**").permitAll()
+                        //Utilisateur
+                                .antMatchers(HttpMethod.PUT,"/utilisateurs").permitAll()
+                                .antMatchers(HttpMethod.GET,"/utilisateurs").permitAll()
+                                .antMatchers(HttpMethod.GET,"/utilisateurs/{id}").permitAll()
+                                .antMatchers(HttpMethod.POST,"/utilisateurs").permitAll()
+                                .antMatchers("/utilisateurs/delete/**").hasRole("ADMIN")
 
-                                // /rest/public est accessible à tout le monde.
-//                                .antMatchers("/rest/public/**").permitAll()
+                        //historique
+                                .antMatchers("api/meteo/**").permitAll()
+//                                .antMatchers("/**").permitAll()
 
                         // on pourrait par ex. demander une authentification pour toutes les autres requêtes :
                         //.anyRequest().authenticated()
