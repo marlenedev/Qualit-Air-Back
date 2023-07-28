@@ -36,7 +36,7 @@ public class SpringSecurityConfig {
                         //Forum
                             //theme
                                 .antMatchers("/themes").permitAll()
-                                .antMatchers(HttpMethod.DELETE,"/themes/{id}").hasAuthority("ADMIN")
+                                .antMatchers(HttpMethod.DELETE,"/themes/{id}").hasRole("ADMIN")
                             //Fil de discussion
                                 .antMatchers("/fil-discussions/**").permitAll()
                             //Message
@@ -51,7 +51,7 @@ public class SpringSecurityConfig {
                                 .antMatchers(HttpMethod.GET,"/utilisateurs").permitAll()
                                 .antMatchers(HttpMethod.GET,"/utilisateurs/{id}").permitAll()
                                 .antMatchers(HttpMethod.POST,"/utilisateurs").permitAll()
-                                .antMatchers("/utilisateurs/delete/**").hasAuthority("ADMIN")
+                                .antMatchers("/utilisateurs/delete/**").hasRole("ADMIN")
 
                         //historique
                                 .antMatchers("api/meteo/**").permitAll()
